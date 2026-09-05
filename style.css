@@ -1,0 +1,257 @@
+/* ============================================================
+   SÚPER PIP! - CAJA REGISTRADORA DE JUGUETE
+   Tactile Toy Skeuomorphism & Animation Styles
+   ============================================================ */
+
+/* CSS Variables para Temas Dinámicos de Comercios */
+:root {
+  --theme-primary: #006591;
+  --theme-primary-container: #0ea5e9;
+  --theme-primary-dark: #004c6e;
+  --theme-accent: #c9e6ff;
+  --theme-bg-tint: #faf8ff;
+}
+
+body.theme-supermarket {
+  --theme-primary: #006591;
+  --theme-primary-container: #0ea5e9;
+  --theme-primary-dark: #004c6e;
+  --theme-accent: #c9e6ff;
+  --theme-bg-tint: #faf8ff;
+}
+
+body.theme-verduleria {
+  --theme-primary: #065f46;
+  --theme-primary-container: #10b981;
+  --theme-primary-dark: #064e3b;
+  --theme-accent: #a7f3d0;
+  --theme-bg-tint: #f0fdf4;
+}
+
+body.theme-jugueteria {
+  --theme-primary: #6d28d9;
+  --theme-primary-container: #8b5cf6;
+  --theme-primary-dark: #4c1d95;
+  --theme-accent: #ddd6fe;
+  --theme-bg-tint: #f5f3ff;
+}
+
+body.theme-libreria {
+  --theme-primary: #92400e;
+  --theme-primary-container: #d97706;
+  --theme-primary-dark: #78350f;
+  --theme-accent: #fde68a;
+  --theme-bg-tint: #fffbeb;
+}
+
+body.theme-papeleria {
+  --theme-primary: #4338ca;
+  --theme-primary-container: #6366f1;
+  --theme-primary-dark: #312e81;
+  --theme-accent: #c7d2fe;
+  --theme-bg-tint: #eef2ff;
+}
+
+body.theme-farmacia {
+  --theme-primary: #0f766e;
+  --theme-primary-container: #14b8a6;
+  --theme-primary-dark: #134e4a;
+  --theme-accent: #99f6e4;
+  --theme-bg-tint: #f0fdfa;
+}
+
+body.theme-doctor {
+  --theme-primary: #0369a1;
+  --theme-primary-container: #0284c7;
+  --theme-primary-dark: #0c4a6e;
+  --theme-accent: #bae6fd;
+  --theme-bg-tint: #f0f9ff;
+}
+
+body.theme-carniceria {
+  --theme-primary: #9f1239;
+  --theme-primary-container: #e11d48;
+  --theme-primary-dark: #881337;
+  --theme-accent: #fecdd3;
+  --theme-bg-tint: #fff1f2;
+}
+
+body.theme-perfumeria {
+  --theme-primary: #831843;
+  --theme-primary-container: #db2777;
+  --theme-primary-dark: #701a75;
+  --theme-accent: #fbcfe8;
+  --theme-bg-tint: #fdf2f8;
+}
+
+body.theme-bazar {
+  --theme-primary: #3730a3;
+  --theme-primary-container: #4f46e5;
+  --theme-primary-dark: #312e81;
+  --theme-accent: #c7d2fe;
+  --theme-bg-tint: #eef2ff;
+}
+
+body.theme-panaderia {
+  --theme-primary: #9a3412;
+  --theme-primary-container: #ea580c;
+  --theme-primary-dark: #7c2d12;
+  --theme-accent: #fed7aa;
+  --theme-bg-tint: #fff7ed;
+}
+
+body.theme-veterinaria {
+  --theme-primary: #166534;
+  --theme-primary-container: #22c55e;
+  --theme-primary-dark: #14532d;
+  --theme-accent: #bbf7d0;
+  --theme-bg-tint: #f0fdf4;
+}
+
+body.theme-heladeria {
+  --theme-primary: #0e7490;
+  --theme-primary-container: #06b6d4;
+  --theme-primary-dark: #155e75;
+  --theme-accent: #a5f3fc;
+  --theme-bg-tint: #ecfeff;
+}
+
+/* Tactile Toy 3D Press Effects (Chunky Plastic Toy Feel) */
+.toy-button-laser {
+  box-shadow: 0 6px 0 0 #930013;
+  transition: all 0.08s ease;
+}
+.toy-button-laser:active {
+  transform: translateY(5px);
+  box-shadow: 0 1px 0 0 #930013;
+}
+
+.toy-button-primary {
+  box-shadow: 0 5px 0 0 var(--theme-primary-dark, #004c6e);
+  transition: all 0.08s ease;
+}
+.toy-button-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 0 var(--theme-primary-dark, #004c6e);
+}
+
+.toy-button-action {
+  box-shadow: 0 5px 0 0 #059669;
+  transition: all 0.08s ease;
+}
+.toy-button-action:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 0 #059669;
+}
+
+.toy-card {
+  box-shadow: 0 6px 0 0 rgba(15, 23, 42, 0.08);
+}
+
+.toy-shadow-cyan {
+  box-shadow: 0 5px 0 0 #0284c7;
+}
+.toy-shadow-cyan:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 0 #0284c7;
+}
+
+.toy-shadow-amber {
+  box-shadow: 0 4px 0 0 #b45309;
+}
+
+.toy-btn-pop {
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Material Symbols alignment */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Laser Scan Beam Animation */
+@keyframes laserSweep {
+  0% {
+    top: 6%;
+    opacity: 0.35;
+  }
+  50% {
+    top: 90%;
+    opacity: 1;
+    box-shadow: 0 0 20px 5px #ef4444;
+  }
+  100% {
+    top: 6%;
+    opacity: 0.35;
+  }
+}
+
+.animate-laser {
+  animation: laserSweep 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Screen Green Flash Effect on Scan */
+#flashOverlay {
+  transition: opacity 0.12s ease-out;
+  pointer-events: none;
+}
+
+/* Item entrance animation */
+@keyframes slideDownCard {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-enter {
+  animation: slideDownCard 0.22s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Receipt Modal Slide Up */
+@keyframes modalSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-receipt {
+  animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Serrated Receipt Bottom Edge */
+.receipt-tear-bottom {
+  background-image: radial-gradient(circle at 10px 0, transparent 8px, #ffffff 9px);
+  background-size: 20px 14px;
+  background-repeat: repeat-x;
+  height: 14px;
+  width: 100%;
+}
+
+/* Simulated Barcode lines */
+.barcode-line {
+  background-color: #0f172a;
+  height: 100%;
+  border-radius: 1px;
+}
+
+/* Custom scrollbar for mobile ticket */
+.receipt-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.receipt-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
