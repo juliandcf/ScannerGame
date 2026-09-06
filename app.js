@@ -28,12 +28,12 @@ const COMMERCE_THEMES = {
     name: "Supermercado",
     icon: "storefront",
     emoji: "🛒",
-    defaultStore: "Súper Sofi",
+    defaultStore: "Súper Pema",
     subtitle: "Supermercado de Juguete",
     receiptTitle: "TICKET DE SUPERMERCADO",
     genericItemPrefix: "Producto",
     defaultPalette: "palette-sky",
-    defaultNames: ["✨ Súper Sofi", "⚡ Hiper Chispita", "🛒 Don Pip"],
+    defaultNames: ["✨ Súper Pema", "⚡ Hiper Chispita", "🛒 Don Pip"],
     catalog: PRODUCTS_CATALOG
   },
   maquillaje: {
@@ -46,7 +46,7 @@ const COMMERCE_THEMES = {
     receiptTitle: "TICKET DE TIENDA DE MAQUILLAJE",
     genericItemPrefix: "Cosmético",
     defaultPalette: "palette-pink",
-    defaultNames: ["💄 Glow & Chic", "✨ Pink Beauty", "🌸 Maquillajes Sofi", "💋 Dulce Glamour"],
+    defaultNames: ["💄 Glow & Chic", "✨ Pink Beauty", "🌸 Maquillajes Pema", "💋 Dulce Glamour"],
     catalog: [
       { name: "Labial Mágico Brillante", emoji: "💄", minPrice: 220, maxPrice: 480, code: "LAB" },
       { name: "Paleta de Sombras Arcoíris", emoji: "🎨", minPrice: 380, maxPrice: 850, code: "SOM" },
@@ -70,7 +70,7 @@ const COMMERCE_THEMES = {
     subtitle: "Frutas y Verduras Frescas",
     receiptTitle: "TICKET DE VERDULERÍA",
     genericItemPrefix: "Fruta/Verdura",
-    defaultNames: ["🍎 La Huertita", "🥦 Verduras Sofi", "🍓 Frutería Arcoíris"],
+    defaultNames: ["🍎 La Huertita", "🥦 Verduras Pema", "🍓 Frutería Arcoíris"],
     catalog: [
       { name: "Manzanas Rojas", emoji: "🍎", minPrice: 90, maxPrice: 180, code: "MAN" },
       { name: "Bananas Dulces", emoji: "🍌", minPrice: 100, maxPrice: 220, code: "BAN" },
@@ -117,7 +117,7 @@ const COMMERCE_THEMES = {
     subtitle: "Cuentos, Fábulas y Lectura",
     receiptTitle: "BOLETA DE LIBRERÍA",
     genericItemPrefix: "Libro/Cuento",
-    defaultNames: ["📚 El Rincón Sabio", "📖 Cuentos Sofi", "✨ Letras Mágicas"],
+    defaultNames: ["📚 El Rincón Sabio", "📖 Cuentos Pema", "✨ Letras Mágicas"],
     catalog: [
       { name: "Cuento de Princesas", emoji: "👑", minPrice: 350, maxPrice: 750, code: "CUE" },
       { name: "Libro de Dinosaurios", emoji: "🦖", minPrice: 400, maxPrice: 850, code: "LIB" },
@@ -138,7 +138,7 @@ const COMMERCE_THEMES = {
     subtitle: "Útiles, Colores y Arte",
     receiptTitle: "TICKET DE PAPELERÍA",
     genericItemPrefix: "Útil Escolar",
-    defaultNames: ["✂️ Papelería Chispita", "🎨 Colores Sofi", "✏️ Trazo Alegre"],
+    defaultNames: ["✂️ Papelería Chispita", "🎨 Colores Pema", "✏️ Trazo Alegre"],
     catalog: [
       { name: "Marcadores de Colores", emoji: "🖍️", minPrice: 250, maxPrice: 550, code: "MAR" },
       { name: "Cuaderno Espiral", emoji: "📓", minPrice: 220, maxPrice: 480, code: "CUA" },
@@ -160,7 +160,7 @@ const COMMERCE_THEMES = {
     subtitle: "Remedios y Primeros Auxilios",
     receiptTitle: "TICKET DE FARMACIA",
     genericItemPrefix: "Medicamento",
-    defaultNames: ["💊 Farmacia Sanita", "🩹 Farmacia Sofi", "✨ Remedio Dulce"],
+    defaultNames: ["💊 Farmacia Sanita", "🩹 Farmacia Pema", "✨ Remedio Dulce"],
     catalog: [
       { name: "Curitas con Dibujitos", emoji: "🩹", minPrice: 120, maxPrice: 250, code: "CUR" },
       { name: "Jarabe Dulce de Frutilla", emoji: "🍯", minPrice: 280, maxPrice: 580, code: "JAR" },
@@ -181,7 +181,7 @@ const COMMERCE_THEMES = {
     subtitle: "Atención Médica y Chequeos",
     receiptTitle: "RECETA Y RECIBO MÉDICO",
     genericItemPrefix: "Chequeo/Servicio",
-    defaultNames: ["🩺 Consultorio Sofi", "🏥 Hospital Cariño", "💉 Clínica Sonrisa"],
+    defaultNames: ["🩺 Consultorio Pema", "🏥 Hospital Cariño", "💉 Clínica Sonrisa"],
     catalog: [
       { name: "Chequeo de Latidos", emoji: "💓", minPrice: 300, maxPrice: 600, code: "LAT" },
       { name: "Venda para Abrazos", emoji: "🩹", minPrice: 150, maxPrice: 320, code: "VEN" },
@@ -201,7 +201,7 @@ const COMMERCE_THEMES = {
     subtitle: "Carnes, Asado y Milanesas",
     receiptTitle: "TICKET DE CARNICERÍA",
     genericItemPrefix: "Corte de Carne",
-    defaultNames: ["🥩 Don Pip Carnes", "🍗 Carnicería Sofi", "🥓 El Buen Corte"],
+    defaultNames: ["🥩 Don Pip Carnes", "🍗 Carnicería Pema", "🥓 El Buen Corte"],
     catalog: [
       { name: "Milanesas Caseras", emoji: "🥩", minPrice: 450, maxPrice: 850, code: "MIL" },
       { name: "Hamburguesas Ricas", emoji: "🍔", minPrice: 320, maxPrice: 650, code: "HAM" },
@@ -221,7 +221,7 @@ const COMMERCE_THEMES = {
     subtitle: "Perfumes, Cremas y Belleza",
     receiptTitle: "TICKET DE PERFUMERÍA",
     genericItemPrefix: "Cosmético/Aroma",
-    defaultNames: ["🧴 Aroma y Brillo", "✨ Perfumería Sofi", "🌸 Pétalos Mágicos"],
+    defaultNames: ["🧴 Aroma y Brillo", "✨ Perfumería Pema", "🌸 Pétalos Mágicos"],
     catalog: [
       { name: "Perfume de Rosas", emoji: "🌹", minPrice: 450, maxPrice: 950, code: "PER" },
       { name: "Jaboncito de Flores", emoji: "🧼", minPrice: 180, maxPrice: 360, code: "JAB" },
@@ -242,7 +242,7 @@ const COMMERCE_THEMES = {
     subtitle: "Cosas Lindas para la Casa",
     receiptTitle: "TICKET DE BAZAR",
     genericItemPrefix: "Artículo del Hogar",
-    defaultNames: ["🏺 Bazar Mil Cosas", "🏡 Bazar Sofi", "✨ Rincón del Hogar"],
+    defaultNames: ["🏺 Bazar Mil Cosas", "🏡 Bazar Pema", "✨ Rincón del Hogar"],
     catalog: [
       { name: "Tacita de Té con Flores", emoji: "☕", minPrice: 250, maxPrice: 520, code: "TAC" },
       { name: "Platito de Porcelana", emoji: "🍽️", minPrice: 220, maxPrice: 480, code: "PLA" },
@@ -263,7 +263,7 @@ const COMMERCE_THEMES = {
     subtitle: "Medialunas, Pan y Tortas",
     receiptTitle: "TICKET DE PANADERÍA",
     genericItemPrefix: "Panificado",
-    defaultNames: ["🥐 La Espiga Dorada", "🥖 Panadería Sofi", "🧁 Dulce Masa"],
+    defaultNames: ["🥐 La Espiga Dorada", "🥖 Panadería Pema", "🧁 Dulce Masa"],
     catalog: [
       { name: "Medialunas Calentitas", emoji: "🥐", minPrice: 160, maxPrice: 320, code: "MED" },
       { name: "Flautita de Pan", emoji: "🥖", minPrice: 120, maxPrice: 240, code: "PAN" },
@@ -283,7 +283,7 @@ const COMMERCE_THEMES = {
     subtitle: "Atención y Mimos para Mascotas",
     receiptTitle: "TICKET VETERINARIO",
     genericItemPrefix: "Cuidado Mascota",
-    defaultNames: ["🐶 Amigos Peludos", "🐱 Huellitas Sofi", "🐾 Patitas Felices"],
+    defaultNames: ["🐶 Amigos Peludos", "🐱 Huellitas Pema", "🐾 Patitas Felices"],
     catalog: [
       { name: "Chequeo al Perrito", emoji: "🐕", minPrice: 320, maxPrice: 650, code: "PER" },
       { name: "Huesito Mordedor", emoji: "🦴", minPrice: 180, maxPrice: 380, code: "HUE" },
@@ -303,7 +303,7 @@ const COMMERCE_THEMES = {
     subtitle: "Cucuruchos y Sabores",
     receiptTitle: "TICKET DE HELADERÍA",
     genericItemPrefix: "Helado/Sabor",
-    defaultNames: ["🍦 Helados Polar", "🍧 Heladería Sofi", "🍨 Copas Mágicas"],
+    defaultNames: ["🍦 Helados Polar", "🍧 Heladería Pema", "🍨 Copas Mágicas"],
     catalog: [
       { name: "Cucurucho Doble Bocha", emoji: "🍦", minPrice: 250, maxPrice: 500, code: "CUE" },
       { name: "Palito de Agua Frutal", emoji: "🍭", minPrice: 120, maxPrice: 240, code: "PAL" },
@@ -442,7 +442,7 @@ const AppState = {
   torchActive: false,
   isScanningCoolDown: false,
   storeConfig: {
-    storeName: "Súper Sofi",
+    storeName: "Súper Pema",
     colorPalette: "palette-sky", // Paleta de colores activa
     productMode: "generic", // "generic" = Escáner de casa (números). "fantasy" = Nombres divertidos
     pipSound: "retail", // "retail" (MP3 Real), "classic", "laser", "double", "bell", "pop", "random"
@@ -511,8 +511,8 @@ function loadRetailAudioBuffer() {
       .then(decoded => {
         retailAudioBuffer = decoded;
       })
-      .catch(() => {});
-  } catch (e) {}
+      .catch(() => { });
+  } catch (e) { }
 }
 
 // Carga el audio MP3 de caja registradora (Finalizar compra)
@@ -529,8 +529,8 @@ function loadRegisterAudioBuffer() {
       .then(decoded => {
         registerAudioBuffer = decoded;
       })
-      .catch(() => {});
-  } catch (e) {}
+      .catch(() => { });
+  } catch (e) { }
 }
 
 /**
@@ -551,7 +551,7 @@ function playRetailBeep() {
       source.start(0);
       return;
     }
-  } catch (e) {}
+  } catch (e) { }
 
   try {
     const soundClone = retailAudio.cloneNode();
@@ -560,7 +560,7 @@ function playRetailBeep() {
     if (promise !== undefined) {
       promise.catch(() => {
         retailAudio.currentTime = 0;
-        retailAudio.play().catch(() => {});
+        retailAudio.play().catch(() => { });
       });
     }
   } catch (err) {
@@ -586,16 +586,15 @@ function playRegisterSound() {
       source.start(0);
       return;
     }
-  } catch (e) {}
+  } catch (e) { }
 
   try {
-    const soundClone = registerAudio.cloneNode();
+    const soundClone = new Audio('sounds/register_sound.mp3');
     soundClone.volume = 0.9;
     const promise = soundClone.play();
     if (promise !== undefined) {
-      promise.catch(() => {
-        registerAudio.currentTime = 0;
-        registerAudio.play().catch(() => {});
+      promise.catch(err => {
+        console.warn("No se pudo reproducir register sound HTML5:", err);
       });
     }
   } catch (err) {
@@ -778,7 +777,7 @@ function playPopSound() {
     gain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.05);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // ==========================================
@@ -788,7 +787,7 @@ function triggerHaptic() {
   if (navigator.vibrate) {
     try {
       navigator.vibrate(70);
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 
@@ -1064,11 +1063,10 @@ function renderCommerceTypeButtons() {
     const isSelected = theme.id === currentTypeId;
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = `p-2.5 rounded-2xl border-2 flex flex-col items-center justify-center transition-all active:scale-95 ${
-      isSelected
+    btn.className = `p-2.5 rounded-2xl border-2 flex flex-col items-center justify-center transition-all active:scale-95 ${isSelected
         ? 'border-primary bg-[var(--theme-accent)] text-primary font-extrabold shadow-sm ring-2 ring-primary/40 scale-[1.02]'
         : 'border-outline-variant bg-white text-on-surface-variant hover:border-primary/50'
-    }`;
+      }`;
     btn.innerHTML = `
       <span class="text-2xl">${theme.emoji}</span>
       <span class="text-[11px] font-headline mt-1 leading-tight text-center font-bold">${theme.name}</span>
@@ -1127,11 +1125,10 @@ function renderPaletteButtons() {
     const isSelected = pal.id === currentPalette;
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = `p-2.5 rounded-2xl border-2 flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
-      isSelected
+    btn.className = `p-2.5 rounded-2xl border-2 flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer ${isSelected
         ? 'font-black scale-[1.02] shadow-sm'
         : 'bg-white hover:border-slate-300 shadow-xs'
-    }`;
+      }`;
     btn.style.borderColor = isSelected ? pal.primary : '#e2e8f0';
     btn.style.backgroundColor = isSelected ? pal.accent : '#ffffff';
     if (isSelected) {
@@ -1175,15 +1172,15 @@ async function toggleCameraScanner() {
       if (!AppState.html5QrScanner) {
         const formatsToSupport = window.Html5QrcodeSupportedFormats
           ? [
-              Html5QrcodeSupportedFormats.QR_CODE,
-              Html5QrcodeSupportedFormats.EAN_13,
-              Html5QrcodeSupportedFormats.EAN_8,
-              Html5QrcodeSupportedFormats.CODE_128,
-              Html5QrcodeSupportedFormats.CODE_39,
-              Html5QrcodeSupportedFormats.UPC_A,
-              Html5QrcodeSupportedFormats.UPC_E,
-              Html5QrcodeSupportedFormats.ITF
-            ]
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.EAN_8,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.ITF
+          ]
           : undefined;
 
         AppState.html5QrScanner = new Html5Qrcode("qrReaderContainer", formatsToSupport ? { formatsToSupport, verbose: false } : undefined);
@@ -1210,7 +1207,7 @@ async function toggleCameraScanner() {
         (decodedText) => {
           scanProduct(decodedText);
         },
-        () => {}
+        () => { }
       );
 
       AppState.cameraActive = true;
@@ -1331,8 +1328,20 @@ function openReceiptModal() {
     return;
   }
 
+  playRegisterSound();
   playChaChingSound();
   triggerHaptic();
+
+  // Animación de confeti al abrir el ticket
+  if (window.confetti) {
+    try {
+      window.confetti({
+        particleCount: 60,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+    } catch (e) { }
+  }
 
   const modal = document.getElementById('receiptModal');
   const itemsContainer = document.getElementById('receiptItemsList');
@@ -1382,10 +1391,23 @@ function closeReceiptModal() {
 }
 
 function startNewShopping() {
+  // Reproduce el sonido de caja registradora register_sound.mp3 (Simula la cobranza/pago)
+  playRegisterSound();
+
+  // Efecto festivo de confeti de compra pagada
+  if (window.confetti) {
+    try {
+      window.confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.5 }
+      });
+    } catch (e) { }
+  }
+
   closeReceiptModal();
   AppState.cart = [];
   updateUI();
-  playPopSound();
 }
 
 // ==========================================
@@ -1503,6 +1525,21 @@ function saveConfigFromModal() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   loadStoredConfig();
+
+  // Desbloqueo y precarga de los audios MP3 al primer toque del usuario
+  const initAudioOnUserInteraction = () => {
+    getAudioContext();
+    loadRetailAudioBuffer();
+    loadRegisterAudioBuffer();
+    document.removeEventListener('pointerdown', initAudioOnUserInteraction);
+    document.removeEventListener('click', initAudioOnUserInteraction);
+  };
+  document.addEventListener('pointerdown', initAudioOnUserInteraction);
+  document.addEventListener('click', initAudioOnUserInteraction);
+  
+  // Intento de precarga inmediata
+  loadRetailAudioBuffer();
+  loadRegisterAudioBuffer();
 
   // 1. Botón Manual Grande "¡HACER PIP!"
   const mainPipBtn = document.getElementById('mainPipButton');
