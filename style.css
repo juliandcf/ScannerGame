@@ -3,118 +3,130 @@
    Tactile Toy Skeuomorphism & Animation Styles
    ============================================================ */
 
-/* CSS Variables para Temas Dinámicos de Comercios */
+/* CSS Variables para Temas Dinámicos y Paletas Infantiles */
 :root {
-  --theme-primary: #006591;
-  --theme-primary-container: #0ea5e9;
-  --theme-primary-dark: #004c6e;
-  --theme-accent: #c9e6ff;
-  --theme-bg-tint: #faf8ff;
-}
-
-body.theme-supermarket {
-  --theme-primary: #006591;
-  --theme-primary-container: #0ea5e9;
-  --theme-primary-dark: #004c6e;
-  --theme-accent: #c9e6ff;
-  --theme-bg-tint: #faf8ff;
-}
-
-body.theme-verduleria {
-  --theme-primary: #065f46;
-  --theme-primary-container: #10b981;
-  --theme-primary-dark: #064e3b;
-  --theme-accent: #a7f3d0;
-  --theme-bg-tint: #f0fdf4;
-}
-
-body.theme-jugueteria {
-  --theme-primary: #6d28d9;
-  --theme-primary-container: #8b5cf6;
-  --theme-primary-dark: #4c1d95;
-  --theme-accent: #ddd6fe;
-  --theme-bg-tint: #f5f3ff;
-}
-
-body.theme-libreria {
-  --theme-primary: #92400e;
-  --theme-primary-container: #d97706;
-  --theme-primary-dark: #78350f;
-  --theme-accent: #fde68a;
-  --theme-bg-tint: #fffbeb;
-}
-
-body.theme-papeleria {
-  --theme-primary: #4338ca;
-  --theme-primary-container: #6366f1;
-  --theme-primary-dark: #312e81;
-  --theme-accent: #c7d2fe;
-  --theme-bg-tint: #eef2ff;
-}
-
-body.theme-farmacia {
-  --theme-primary: #0f766e;
-  --theme-primary-container: #14b8a6;
-  --theme-primary-dark: #134e4a;
-  --theme-accent: #99f6e4;
-  --theme-bg-tint: #f0fdfa;
-}
-
-body.theme-doctor {
-  --theme-primary: #0369a1;
-  --theme-primary-container: #0284c7;
-  --theme-primary-dark: #0c4a6e;
-  --theme-accent: #bae6fd;
+  --theme-primary: #0284c7;
+  --theme-primary-container: #38bdf8;
+  --theme-primary-dark: #0369a1;
+  --theme-accent: #e0f2fe;
+  --theme-border: #38bdf8;
   --theme-bg-tint: #f0f9ff;
+  --theme-bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+  --theme-glow: rgba(2, 132, 199, 0.25);
 }
 
-body.theme-carniceria {
-  --theme-primary: #9f1239;
-  --theme-primary-container: #e11d48;
-  --theme-primary-dark: #881337;
-  --theme-accent: #fecdd3;
-  --theme-bg-tint: #fff1f2;
+body {
+  background: var(--theme-bg-gradient, #f0f9ff);
+  background-attachment: fixed;
+  transition: background 0.35s ease, color 0.2s ease;
 }
 
-body.theme-perfumeria {
-  --theme-primary: #831843;
-  --theme-primary-container: #db2777;
-  --theme-primary-dark: #701a75;
-  --theme-accent: #fbcfe8;
+/* Clases de Temas y Paletas con alta especificidad */
+body.palette-pink {
+  --theme-primary: #db2777;
+  --theme-primary-container: #f472b6;
+  --theme-primary-dark: #9d174d;
+  --theme-accent: #fce7f3;
+  --theme-border: #f472b6;
   --theme-bg-tint: #fdf2f8;
+  --theme-bg-gradient: linear-gradient(135deg, #fff0f6 0%, #fce7f3 50%, #fbcfe8 100%);
+  --theme-glow: rgba(219, 39, 119, 0.25);
 }
 
-body.theme-bazar {
-  --theme-primary: #3730a3;
-  --theme-primary-container: #4f46e5;
-  --theme-primary-dark: #312e81;
-  --theme-accent: #c7d2fe;
-  --theme-bg-tint: #eef2ff;
+body.palette-sky {
+  --theme-primary: #0284c7;
+  --theme-primary-container: #38bdf8;
+  --theme-primary-dark: #0369a1;
+  --theme-accent: #e0f2fe;
+  --theme-border: #38bdf8;
+  --theme-bg-tint: #f0f9ff;
+  --theme-bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+  --theme-glow: rgba(2, 132, 199, 0.25);
 }
 
-body.theme-panaderia {
-  --theme-primary: #9a3412;
-  --theme-primary-container: #ea580c;
-  --theme-primary-dark: #7c2d12;
-  --theme-accent: #fed7aa;
-  --theme-bg-tint: #fff7ed;
-}
-
-body.theme-veterinaria {
-  --theme-primary: #166534;
-  --theme-primary-container: #22c55e;
-  --theme-primary-dark: #14532d;
-  --theme-accent: #bbf7d0;
+body.palette-mint {
+  --theme-primary: #059669;
+  --theme-primary-container: #10b981;
+  --theme-primary-dark: #047857;
+  --theme-accent: #d1fae5;
+  --theme-border: #34d399;
   --theme-bg-tint: #f0fdf4;
+  --theme-bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+  --theme-glow: rgba(5, 150, 105, 0.25);
 }
 
-body.theme-heladeria {
-  --theme-primary: #0e7490;
-  --theme-primary-container: #06b6d4;
-  --theme-primary-dark: #155e75;
-  --theme-accent: #a5f3fc;
-  --theme-bg-tint: #ecfeff;
+body.palette-purple {
+  --theme-primary: #7c3aed;
+  --theme-primary-container: #a855f7;
+  --theme-primary-dark: #5b21b6;
+  --theme-accent: #ede9fe;
+  --theme-border: #c084fc;
+  --theme-bg-tint: #faf5ff;
+  --theme-bg-gradient: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%);
+  --theme-glow: rgba(124, 58, 237, 0.25);
 }
+
+body.palette-orange {
+  --theme-primary: #ea580c;
+  --theme-primary-container: #fb923c;
+  --theme-primary-dark: #c2410c;
+  --theme-accent: #ffedd5;
+  --theme-border: #fb923c;
+  --theme-bg-tint: #fff7ed;
+  --theme-bg-gradient: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%);
+  --theme-glow: rgba(234, 88, 12, 0.25);
+}
+
+body.palette-yellow {
+  --theme-primary: #d97706;
+  --theme-primary-container: #f59e0b;
+  --theme-primary-dark: #b45309;
+  --theme-accent: #fef3c7;
+  --theme-border: #fbbf24;
+  --theme-bg-tint: #fffbeb;
+  --theme-bg-gradient: linear-gradient(135deg, #fffdf5 0%, #fef3c7 50%, #fde68a 100%);
+  --theme-glow: rgba(217, 119, 6, 0.25);
+}
+
+body.palette-red {
+  --theme-primary: #e11d48;
+  --theme-primary-container: #fb7185;
+  --theme-primary-dark: #be123c;
+  --theme-accent: #ffe4e6;
+  --theme-border: #f43f5e;
+  --theme-bg-tint: #fff1f2;
+  --theme-bg-gradient: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%);
+  --theme-glow: rgba(225, 29, 72, 0.25);
+}
+
+body.palette-cyan {
+  --theme-primary: #0891b2;
+  --theme-primary-container: #06b6d4;
+  --theme-primary-dark: #0e7490;
+  --theme-accent: #cffafe;
+  --theme-border: #22d3ee;
+  --theme-bg-tint: #ecfeff;
+  --theme-bg-gradient: linear-gradient(135deg, #ecfeff 0%, #cffafe 50%, #a5f3fc 100%);
+  --theme-glow: rgba(8, 145, 178, 0.25);
+}
+
+/* Clases de Efectos de Juguete Dinámicos */
+.theme-app-header {
+  border-bottom: 3.5px solid var(--theme-border, #38bdf8);
+  box-shadow: 0 4px 16px var(--theme-glow, rgba(14, 165, 233, 0.15));
+}
+
+.theme-card-toy {
+  border: 3px solid var(--theme-border, #38bdf8) !important;
+  box-shadow: 0 7px 0 0 var(--theme-accent, #bae6fd), 0 10px 24px var(--theme-glow, rgba(0, 0, 0, 0.05));
+  transition: all 0.25s ease;
+}
+
+.theme-bottom-bar {
+  border-top: 3.5px solid var(--theme-border, #38bdf8);
+  box-shadow: 0 -6px 20px var(--theme-glow, rgba(14, 165, 233, 0.12));
+}
+
 
 /* Tactile Toy 3D Press Effects (Chunky Plastic Toy Feel) */
 .toy-button-laser {

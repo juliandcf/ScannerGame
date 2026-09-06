@@ -28,13 +28,37 @@ const COMMERCE_THEMES = {
     name: "Supermercado",
     icon: "storefront",
     emoji: "🛒",
-    roleTitle: "Cajera Oficial:",
     defaultStore: "Súper Sofi",
     subtitle: "Supermercado de Juguete",
     receiptTitle: "TICKET DE SUPERMERCADO",
     genericItemPrefix: "Producto",
+    defaultPalette: "palette-sky",
     defaultNames: ["✨ Súper Sofi", "⚡ Hiper Chispita", "🛒 Don Pip"],
     catalog: PRODUCTS_CATALOG
+  },
+  maquillaje: {
+    id: "maquillaje",
+    name: "Maquillajes",
+    icon: "brush",
+    emoji: "💄",
+    defaultStore: "Glow & Chic",
+    subtitle: "Maquillajes y Belleza",
+    receiptTitle: "TICKET DE TIENDA DE MAQUILLAJE",
+    genericItemPrefix: "Cosmético",
+    defaultPalette: "palette-pink",
+    defaultNames: ["💄 Glow & Chic", "✨ Pink Beauty", "🌸 Maquillajes Sofi", "💋 Dulce Glamour"],
+    catalog: [
+      { name: "Labial Mágico Brillante", emoji: "💄", minPrice: 220, maxPrice: 480, code: "LAB" },
+      { name: "Paleta de Sombras Arcoíris", emoji: "🎨", minPrice: 380, maxPrice: 850, code: "SOM" },
+      { name: "Esmalte con Glitter", emoji: "💅", minPrice: 180, maxPrice: 390, code: "ESM" },
+      { name: "Rubor Rosa Suave", emoji: "🌸", minPrice: 250, maxPrice: 520, code: "RUB" },
+      { name: "Máscara de Pestañas Estrella", emoji: "✨", minPrice: 280, maxPrice: 590, code: "PES" },
+      { name: "Brillo Labial Frutal", emoji: "🍓", minPrice: 190, maxPrice: 420, code: "BRI" },
+      { name: "Brocha Suave para Polvos", emoji: "🖌️", minPrice: 200, maxPrice: 450, code: "BRO" },
+      { name: "Espejito con Luces Led", emoji: "🪞", minPrice: 450, maxPrice: 920, code: "ESP" },
+      { name: "Perfumito Dulce de Flores", emoji: "🧴", minPrice: 320, maxPrice: 700, code: "PER" },
+      { name: "Stickers Faciales con Diamantes", emoji: "💎", minPrice: 150, maxPrice: 350, code: "STI" }
+    ]
   },
   verduleria: {
     id: "verduleria",
@@ -281,7 +305,7 @@ const COMMERCE_THEMES = {
     genericItemPrefix: "Helado/Sabor",
     defaultNames: ["🍦 Helados Polar", "🍧 Heladería Sofi", "🍨 Copas Mágicas"],
     catalog: [
-      { name: "Cucurucho Doble Bocha", emoji: "🍦", minPrice: 250, maxPrice: 500, code: "CUC" },
+      { name: "Cucurucho Doble Bocha", emoji: "🍦", minPrice: 250, maxPrice: 500, code: "CUE" },
       { name: "Palito de Agua Frutal", emoji: "🍭", minPrice: 120, maxPrice: 240, code: "PAL" },
       { name: "Copa Helada Gigante", emoji: "🍨", minPrice: 400, maxPrice: 850, code: "COP" },
       { name: "Pote de Dulce de Leche", emoji: "🍯", minPrice: 350, maxPrice: 750, code: "POT" },
@@ -291,12 +315,127 @@ const COMMERCE_THEMES = {
   }
 };
 
+// Paletas de Colores Disponibles para Personalizar el Local (Diseñadas para niños y niñas)
+const COLOR_PALETTES = [
+  {
+    id: "palette-pink",
+    name: "Rosa Glam",
+    subtitle: "Chic & Dulce",
+    emoji: "💖",
+    primary: "#db2777",
+    primaryContainer: "#f472b6",
+    primaryDark: "#9d174d",
+    accent: "#fce7f3",
+    border: "#f472b6",
+    bgTint: "#fdf2f8",
+    bgGradient: "linear-gradient(135deg, #fff0f6 0%, #fce7f3 50%, #fbcfe8 100%)",
+    glow: "rgba(219, 39, 119, 0.25)"
+  },
+  {
+    id: "palette-sky",
+    name: "Celeste Súper",
+    subtitle: "Aéreo & Fresco",
+    emoji: "🌊",
+    primary: "#0284c7",
+    primaryContainer: "#38bdf8",
+    primaryDark: "#0369a1",
+    accent: "#e0f2fe",
+    border: "#38bdf8",
+    bgTint: "#f0f9ff",
+    bgGradient: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%)",
+    glow: "rgba(2, 132, 199, 0.25)"
+  },
+  {
+    id: "palette-mint",
+    name: "Verde Menta",
+    subtitle: "Aventura Selva",
+    emoji: "🌿",
+    primary: "#059669",
+    primaryContainer: "#10b981",
+    primaryDark: "#047857",
+    accent: "#d1fae5",
+    border: "#34d399",
+    bgTint: "#f0fdf4",
+    bgGradient: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%)",
+    glow: "rgba(5, 150, 105, 0.25)"
+  },
+  {
+    id: "palette-purple",
+    name: "Violeta Galáctico",
+    subtitle: "Magia Espacial",
+    emoji: "🍇",
+    primary: "#7c3aed",
+    primaryContainer: "#a855f7",
+    primaryDark: "#5b21b6",
+    accent: "#ede9fe",
+    border: "#c084fc",
+    bgTint: "#faf5ff",
+    bgGradient: "linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%)",
+    glow: "rgba(124, 58, 237, 0.25)"
+  },
+  {
+    id: "palette-orange",
+    name: "Naranja Neón",
+    subtitle: "Fuego Relámpago",
+    emoji: "🍊",
+    primary: "#ea580c",
+    primaryContainer: "#fb923c",
+    primaryDark: "#c2410c",
+    accent: "#ffedd5",
+    border: "#fb923c",
+    bgTint: "#fff7ed",
+    bgGradient: "linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%)",
+    glow: "rgba(234, 88, 12, 0.25)"
+  },
+  {
+    id: "palette-yellow",
+    name: "Amarillo Chispa",
+    subtitle: "Alegría Dorada",
+    emoji: "☀️",
+    primary: "#d97706",
+    primaryContainer: "#f59e0b",
+    primaryDark: "#b45309",
+    accent: "#fef3c7",
+    border: "#fbbf24",
+    bgTint: "#fffbeb",
+    bgGradient: "linear-gradient(135deg, #fffdf5 0%, #fef3c7 50%, #fde68a 100%)",
+    glow: "rgba(217, 119, 6, 0.25)"
+  },
+  {
+    id: "palette-red",
+    name: "Rojo Fresa",
+    subtitle: "Poder Cereza",
+    emoji: "🍒",
+    primary: "#e11d48",
+    primaryContainer: "#fb7185",
+    primaryDark: "#be123c",
+    accent: "#ffe4e6",
+    border: "#f43f5e",
+    bgTint: "#fff1f2",
+    bgGradient: "linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%)",
+    glow: "rgba(225, 29, 72, 0.25)"
+  },
+  {
+    id: "palette-cyan",
+    name: "Aqua Neón",
+    subtitle: "Arcoíris Brillante",
+    emoji: "🌈",
+    primary: "#0891b2",
+    primaryContainer: "#06b6d4",
+    primaryDark: "#0e7490",
+    accent: "#cffafe",
+    border: "#22d3ee",
+    bgTint: "#ecfeff",
+    bgGradient: "linear-gradient(135deg, #ecfeff 0%, #cffafe 50%, #a5f3fc 100%)",
+    glow: "rgba(8, 145, 178, 0.25)"
+  }
+];
+
 // ==========================================
 // 2. ESTADO DE LA APLICACIÓN
 // ==========================================
 const AppState = {
   cart: [],
-  points: 0,
   audioEnabled: true,
   cameraActive: false,
   html5QrScanner: null,
@@ -304,10 +443,8 @@ const AppState = {
   isScanningCoolDown: false,
   storeConfig: {
     storeName: "Súper Sofi",
-    cashierName: "Sofi Estrella",
-    currency: "⭐ Pips",
-    currencyPrefix: "$",
-    productMode: "generic", // "generic" = No dice qué producto es (Producto #1, #2). "fantasy" = Chocolate, Banana...
+    colorPalette: "palette-sky", // Paleta de colores activa
+    productMode: "generic", // "generic" = Escáner de casa (números). "fantasy" = Nombres divertidos
     pipSound: "retail", // "retail" (MP3 Real), "classic", "laser", "double", "bell", "pop", "random"
     commerceType: "supermarket" // Tipo de comercio activo
   }
@@ -702,8 +839,6 @@ function scanProduct(detectedBarcode = null) {
   };
 
   AppState.cart.unshift(newItem);
-  AppState.points += 10;
-
   updateUI();
 }
 
@@ -727,10 +862,9 @@ function calculateTotal() {
   return AppState.cart.reduce((sum, item) => sum + item.price, 0);
 }
 
-// Formatear precio según moneda seleccionada
+// Formatear precio (Siempre en Pesos $)
 function formatCurrency(amount) {
-  const symbol = AppState.storeConfig.currencyPrefix || "$";
-  return `${symbol}${amount.toLocaleString('es-AR')}`;
+  return `$${amount.toLocaleString('es-AR')}`;
 }
 
 // ==========================================
@@ -742,14 +876,12 @@ function updateUI() {
   const headerItemCount = document.getElementById('headerItemCount');
   const cartCountBadge = document.getElementById('cartCountBadge');
   const runningTotalDisplay = document.getElementById('runningTotalDisplay');
-  const streakPoints = document.getElementById('streakPoints');
 
   const totalCount = AppState.cart.length;
   const totalAmount = calculateTotal();
 
   if (headerItemCount) headerItemCount.textContent = totalCount;
   if (cartCountBadge) cartCountBadge.textContent = totalCount;
-  if (streakPoints) streakPoints.textContent = `${AppState.points} pts`;
   if (runningTotalDisplay) runningTotalDisplay.textContent = formatCurrency(totalAmount);
 
   if (!itemsContainer) return;
@@ -768,25 +900,25 @@ function updateUI() {
 
   AppState.cart.forEach((item, index) => {
     const itemEl = document.createElement('div');
-    itemEl.className = 'bg-surface-container-lowest rounded-2xl p-3.5 border-2 border-outline-variant toy-card flex items-center justify-between gap-3 animate-card-enter';
+    itemEl.className = 'bg-white rounded-2xl p-3.5 border-2 border-[var(--theme-border)] shadow-[0_4px_0_0_var(--theme-accent)] flex items-center justify-between gap-3 animate-card-enter';
     itemEl.innerHTML = `
       <div class="flex items-center gap-3 min-w-0">
-        <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-2xl shadow-inner shrink-0">
+        <div class="w-12 h-12 rounded-xl bg-[var(--theme-accent)] flex items-center justify-center text-2xl shadow-inner shrink-0 border border-[var(--theme-border)]/40">
           ${item.emoji}
         </div>
         <div class="truncate">
-          <h3 class="text-headline-sm font-headline-sm text-on-surface leading-snug truncate">${item.name}</h3>
+          <h3 class="text-sm font-headline font-black text-on-surface leading-snug truncate">${item.name}</h3>
           <div class="flex items-center gap-2 mt-0.5">
-            <span class="text-label-sm font-label-sm bg-surface-container text-on-surface-variant px-2 py-0.5 rounded font-mono">${item.code}</span>
-            <span class="text-body-sm font-body-sm text-outline text-xs">${item.time}</span>
+            <span class="text-[11px] font-mono font-bold bg-[var(--theme-accent)] text-primary px-2 py-0.5 rounded border border-[var(--theme-border)]/30">${item.code}</span>
+            <span class="text-xs text-slate-400 font-bold">${item.time}</span>
           </div>
         </div>
       </div>
       <div class="flex items-center gap-2 shrink-0">
-        <div class="bg-amber-100 text-amber-900 font-price-display text-headline-sm px-2.5 py-1 rounded-xl font-bold -rotate-2 shadow-sm border border-amber-300">
+        <div class="bg-amber-100 text-amber-950 font-price-display text-sm sm:text-base px-2.5 py-1 rounded-xl font-black -rotate-2 shadow-xs border border-amber-300">
           ${formatCurrency(item.price)}
         </div>
-        <button onclick="removeCartItem('${item.id}')" class="w-9 h-9 rounded-xl bg-red-100 text-red-700 flex items-center justify-center hover:bg-red-200 active:scale-90 transition-all" title="Quitar">
+        <button onclick="removeCartItem('${item.id}')" class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center hover:bg-rose-200 active:scale-90 transition-all border border-rose-200" title="Quitar">
           <span class="material-symbols-outlined text-base" data-icon="delete">delete</span>
         </button>
       </div>
@@ -795,101 +927,85 @@ function updateUI() {
   });
 }
 
-// Aplicar configuración de la tienda a los textos y al tema visual de la app
 function applyStoreConfig() {
   const currentTheme = COMMERCE_THEMES[AppState.storeConfig.commerceType] || COMMERCE_THEMES.supermarket;
+  const paletteId = AppState.storeConfig.colorPalette || currentTheme.defaultPalette || 'palette-sky';
+  const pal = COLOR_PALETTES.find(p => p.id === paletteId) || COLOR_PALETTES[1];
 
-  // 1. Aplicar clase de tema a <body>
-  document.body.className = `bg-surface font-body text-on-surface antialiased select-none pb-28 theme-${currentTheme.id}`;
+  // 1. INYECCIÓN DIRECTA DE VARIABLES CSS EN :ROOT (MÁXIMA ESPECIFICIDAD)
+  const root = document.documentElement;
+  root.style.setProperty('--theme-primary', pal.primary);
+  root.style.setProperty('--theme-primary-container', pal.primaryContainer);
+  root.style.setProperty('--theme-primary-dark', pal.primaryDark);
+  root.style.setProperty('--theme-accent', pal.accent);
+  root.style.setProperty('--theme-border', pal.border);
+  root.style.setProperty('--theme-bg-tint', pal.bgTint);
+  root.style.setProperty('--theme-bg-gradient', pal.bgGradient);
+  root.style.setProperty('--theme-glow', pal.glow);
 
-  // 2. Actualizar icono y subtítulo del encabezado
+  // 2. FONDO COMPLETO DE LA WEB (VIBRANTE Y LLAMATIVO PARA NIÑOS Y NIÑAS)
+  document.body.style.background = pal.bgGradient;
+  document.body.style.minHeight = '100dvh';
+  document.body.className = `bg-surface font-body text-on-surface antialiased select-none pb-28 theme-${currentTheme.id} ${pal.id}`;
+
+  // 3. COLOR DE BARRA DE NAVEGACIÓN MÓVIL
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', pal.primary);
+
+  // 4. Encabezado principal: Nombre del negocio en grande y visible
+  const storeMainTitle = document.getElementById('storeMainTitle');
+  if (storeMainTitle) storeMainTitle.textContent = AppState.storeConfig.storeName || currentTheme.defaultStore;
+
+  const storeSubtitle = document.getElementById('storeCategorySubtitle');
+  if (storeSubtitle) storeSubtitle.textContent = currentTheme.subtitle || "Súper Pip! • Caja Mágica";
+
   const storeIcon = document.getElementById('storeIcon');
   if (storeIcon) storeIcon.textContent = currentTheme.icon;
 
-  const storeSubtitle = document.getElementById('storeCategorySubtitle');
-  if (storeSubtitle) storeSubtitle.textContent = AppState.storeConfig.storeName || currentTheme.defaultStore;
+  const wizardHeaderIcon = document.getElementById('wizardHeaderIcon');
+  if (wizardHeaderIcon) wizardHeaderIcon.textContent = currentTheme.emoji || "🏬";
 
   const storeNameEls = document.querySelectorAll('.dynamic-store-name');
   storeNameEls.forEach(el => el.textContent = AppState.storeConfig.storeName || currentTheme.defaultStore);
 
-  const cashierEls = document.querySelectorAll('.dynamic-cashier-name');
-  cashierEls.forEach(el => el.textContent = AppState.storeConfig.cashierName);
-
-  // 3. Rol y emoji de la cajera/profesional
-  const cashierBadgeEmoji = document.getElementById('cashierBadgeEmoji');
-  if (cashierBadgeEmoji) cashierBadgeEmoji.textContent = currentTheme.emoji;
-
-  const cashierRoleTitle = document.getElementById('cashierRoleTitle');
-  if (cashierRoleTitle) cashierRoleTitle.textContent = currentTheme.roleTitle;
-
-  // 4. Ticket de compra
+  // 5. Ticket de compra
   const receiptStoreCategory = document.getElementById('receiptStoreCategory');
   if (receiptStoreCategory) receiptStoreCategory.textContent = currentTheme.receiptTitle;
 
-  // 5. Moneda
-  const currencyBadge = document.getElementById('currencyBadge');
-  if (currencyBadge) currencyBadge.textContent = AppState.storeConfig.currency;
-
-  // 6. Selector de comercios y chips de sugerencias
+  // 6. Render de componentes del Wizard
   renderCommerceTypeButtons();
   updateSuggestionChips();
+  renderPaletteButtons();
 
-  // 7. Actualizar botones de modo de producto en el modal
+  // 7. Botones de modo de producto en el Paso 4
   const btnGen = document.getElementById('btnModeGeneric');
   const btnFan = document.getElementById('btnModeFantasy');
   if (btnGen && btnFan) {
     if (AppState.storeConfig.productMode === "fantasy") {
-      btnFan.classList.add('border-primary', 'bg-sky-100', 'text-primary');
-      btnFan.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
-      btnGen.classList.remove('border-primary', 'bg-sky-100', 'text-primary');
-      btnGen.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
+      btnFan.className = 'product-mode-btn p-3.5 rounded-2xl border-2 border-primary bg-[var(--theme-accent)] text-primary font-headline text-xs font-bold flex items-center gap-3 transition-all shadow-xs text-left ring-2 ring-primary/40';
+      btnGen.className = 'product-mode-btn p-3.5 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex items-center gap-3 transition-all shadow-xs text-left';
     } else {
-      btnGen.classList.add('border-primary', 'bg-sky-100', 'text-primary');
-      btnGen.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
-      btnFan.classList.remove('border-primary', 'bg-sky-100', 'text-primary');
-      btnFan.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
+      btnGen.className = 'product-mode-btn p-3.5 rounded-2xl border-2 border-primary bg-[var(--theme-accent)] text-primary font-headline text-xs font-bold flex items-center gap-3 transition-all shadow-xs text-left ring-2 ring-primary/40';
+      btnFan.className = 'product-mode-btn p-3.5 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex items-center gap-3 transition-all shadow-xs text-left';
     }
   }
 
-  // 8. Actualizar botones de sonido del Pip en el modal
+  // 8. Botones de sonido del Pip en el Paso 3
   const currentSound = AppState.storeConfig.pipSound || 'retail';
   document.querySelectorAll('.pip-sound-btn').forEach(btn => {
     if (btn.dataset.sound === currentSound) {
-      btn.classList.add('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
-      btn.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
+      btn.classList.add('border-primary', 'bg-[var(--theme-accent)]', 'text-primary', 'ring-2', 'ring-primary/40');
+      btn.classList.remove('border-outline-variant', 'bg-white', 'text-on-surface-variant');
     } else {
-      btn.classList.remove('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
+      btn.classList.remove('border-primary', 'bg-[var(--theme-accent)]', 'text-primary', 'ring-2', 'ring-primary/40');
       btn.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
-    }
-  });
-
-  // 9. Actualizar botones de moneda
-  const currentCurr = AppState.storeConfig.currency || "⭐ Pips";
-  document.querySelectorAll('.currency-opt-btn').forEach(btn => {
-    if (btn.dataset.currency === currentCurr) {
-      btn.classList.add('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
-      btn.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
-    } else {
-      btn.classList.remove('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
-      btn.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
-    }
-  });
-
-  // 10. Actualizar selección de chips de cajero/a
-  const currentCashier = AppState.storeConfig.cashierName;
-  document.querySelectorAll('.cashier-quick-btn').forEach(btn => {
-    if (btn.dataset.name === currentCashier) {
-      btn.classList.add('bg-primary', 'text-white', 'border-primary');
-      btn.classList.remove('bg-white', 'text-on-surface', 'border-outline-variant');
-    } else {
-      btn.classList.remove('bg-primary', 'text-white', 'border-primary');
-      btn.classList.add('bg-white', 'text-on-surface', 'border-outline-variant');
     }
   });
 
   updateUI();
 }
 
+// Selector de tipo de negocio (Paso 1)
 function renderCommerceTypeButtons() {
   const container = document.getElementById('commerceTypesContainer');
   if (!container) return;
@@ -901,19 +1017,21 @@ function renderCommerceTypeButtons() {
     const isSelected = theme.id === currentTypeId;
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = `p-2 rounded-xl border-2 flex flex-col items-center justify-center transition-all ${
+    btn.className = `p-2.5 rounded-2xl border-2 flex flex-col items-center justify-center transition-all active:scale-95 ${
       isSelected
-        ? 'border-primary bg-sky-100 text-primary font-bold shadow-sm'
+        ? 'border-primary bg-[var(--theme-accent)] text-primary font-extrabold shadow-sm ring-2 ring-primary/40 scale-[1.02]'
         : 'border-outline-variant bg-white text-on-surface-variant hover:border-primary/50'
     }`;
     btn.innerHTML = `
-      <span class="text-xl">${theme.emoji}</span>
-      <span class="text-[11px] font-headline mt-0.5 leading-tight text-center">${theme.name}</span>
+      <span class="text-2xl">${theme.emoji}</span>
+      <span class="text-[11px] font-headline mt-1 leading-tight text-center font-bold">${theme.name}</span>
     `;
     btn.addEventListener('click', () => {
       playPopSound();
       AppState.storeConfig.commerceType = theme.id;
-      // Proponer nombre del local de ese comercio
+      if (theme.defaultPalette) {
+        AppState.storeConfig.colorPalette = theme.defaultPalette;
+      }
       const storeInput = document.getElementById('configStoreName');
       if (storeInput) {
         storeInput.value = theme.defaultStore;
@@ -926,6 +1044,7 @@ function renderCommerceTypeButtons() {
   });
 }
 
+// Chips sugeridos de nombres para el local (Paso 2)
 function updateSuggestionChips() {
   const container = document.getElementById('suggestionChipsContainer');
   if (!container) return;
@@ -935,7 +1054,7 @@ function updateSuggestionChips() {
   (currentTheme.defaultNames || []).forEach(name => {
     const chip = document.createElement('button');
     chip.type = 'button';
-    chip.className = 'chip-suggest-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-surface-container text-primary hover:bg-primary hover:text-white transition-all';
+    chip.className = 'chip-suggest-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-[var(--theme-accent)] text-primary hover:bg-primary hover:text-white transition-all active:scale-95 border border-[var(--theme-border)]/40';
     chip.textContent = name;
     chip.addEventListener('click', () => {
       const storeInput = document.getElementById('configStoreName');
@@ -949,25 +1068,44 @@ function updateSuggestionChips() {
   });
 }
 
+// Selector de Paletas de Colores (Paso 2 - Transformación en tiempo real para niños)
+function renderPaletteButtons() {
+  const container = document.getElementById('paletteOptionsContainer');
+  if (!container) return;
+
+  const currentPalette = AppState.storeConfig.colorPalette || 'palette-sky';
+  container.innerHTML = '';
+
+  COLOR_PALETTES.forEach(pal => {
+    const isSelected = pal.id === currentPalette;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+      <span class="text-xs font-headline font-bold text-on-surface leading-tight">${pal.name}</span>
+    `;
+    btn.addEventListener('click', () => {
+      playPopSound();
+      AppState.storeConfig.colorPalette = pal.id;
+      renderPaletteButtons();
+      applyStoreConfig();
+      saveStoredConfig();
+    });
+    container.appendChild(btn);
+  });
+}
+
 // ==========================================
-// 7. CÁMARA Y LECTOR QR / CÓDIGOS DE BARRA
+// 7. CÁMARA Y LINTERNA (HARDWARE TORCH)
 // ==========================================
 async function toggleCameraScanner() {
+  playPopSound();
   const cameraBtnText = document.getElementById('cameraBtnText');
   const cameraStatusPill = document.getElementById('cameraStatusPill');
   const qrReaderDiv = document.getElementById('qrReaderContainer');
 
   if (!AppState.cameraActive) {
-    // Iniciar cámara con Html5Qrcode
     try {
-      if (typeof Html5Qrcode === "undefined") {
-        alert("El módulo de cámara no está disponible offline. Puedes escanear tocando el visor o el botón rojo.");
-        return;
-      }
-
       if (!AppState.html5QrScanner) {
-        // Soporte completo para códigos de barra de supermercado (EAN-13, UPC, Code 128, etc.) y QR
-        const formatsToSupport = (typeof Html5QrcodeSupportedFormats !== "undefined")
+        const formatsToSupport = window.Html5QrcodeSupportedFormats
           ? [
               Html5QrcodeSupportedFormats.QR_CODE,
               Html5QrcodeSupportedFormats.EAN_13,
@@ -976,7 +1114,6 @@ async function toggleCameraScanner() {
               Html5QrcodeSupportedFormats.CODE_39,
               Html5QrcodeSupportedFormats.UPC_A,
               Html5QrcodeSupportedFormats.UPC_E,
-              Html5QrcodeSupportedFormats.CODABAR,
               Html5QrcodeSupportedFormats.ITF
             ]
           : undefined;
@@ -989,7 +1126,6 @@ async function toggleCameraScanner() {
       const config = {
         fps: 15,
         qrbox: (viewfinderWidth, viewfinderHeight) => {
-          // Visor panorámico para captar rápido códigos de barra horizontales
           const width = Math.min(Math.floor(viewfinderWidth * 0.9), 320);
           const height = Math.min(Math.floor(viewfinderHeight * 0.65), 180);
           return { width, height };
@@ -1003,13 +1139,10 @@ async function toggleCameraScanner() {
       await AppState.html5QrScanner.start(
         { facingMode: "environment" },
         config,
-        (decodedText, decodedResult) => {
-          // Código detectado exitosamente (sea QR o código de barras de cualquier producto)
+        (decodedText) => {
           scanProduct(decodedText);
         },
-        (errorMessage) => {
-          // Parseo continuo de frames
-        }
+        () => {}
       );
 
       AppState.cameraActive = true;
@@ -1023,10 +1156,9 @@ async function toggleCameraScanner() {
     } catch (err) {
       console.warn("No se pudo iniciar la cámara:", err);
       qrReaderDiv.classList.add('hidden');
-      alert("No se pudo acceder a la cámara trasera. Asegúrate de dar permiso o pulsa el botón '¡HACER PIP!' para jugar sin cámara.");
+      alert("No se pudo acceder a la cámara. Asegúrate de dar permiso o pulsa el botón rojo '¡HACER PIP!' para jugar sin cámara.");
     }
   } else {
-    // Detener cámara
     try {
       if (AppState.html5QrScanner) {
         await AppState.html5QrScanner.stop();
@@ -1039,35 +1171,85 @@ async function toggleCameraScanner() {
     if (cameraBtnText) cameraBtnText.textContent = "Cámara Real";
     if (cameraStatusPill) {
       cameraStatusPill.innerHTML = `
-        <span class="material-symbols-outlined text-label-sm" data-icon="qr_code_scanner">qr_code_scanner</span>
+        <span class="material-symbols-outlined text-xs" data-icon="qr_code_scanner">qr_code_scanner</span>
         <span>Listo para pip</span>
       `;
     }
   }
 }
 
-// Linterna simulada / real
-function toggleTorch() {
+// Linterna: Control de Hardware Torch con fallback a halo visual de pantalla
+async function toggleTorch() {
   AppState.torchActive = !AppState.torchActive;
   const torchHalo = document.getElementById('flashlightHalo');
   const toggleTorchBtn = document.getElementById('toggleTorchBtn');
+  const torchIcon = document.getElementById('torchIcon');
+  const torchText = document.getElementById('torchText');
 
+  // Si se enciende la linterna y la cámara está apagada, encender cámara para habilitar el hardware torch
+  if (AppState.torchActive && !AppState.cameraActive) {
+    try {
+      await toggleCameraScanner();
+    } catch (e) {
+      console.warn("No se pudo iniciar cámara para linterna:", e);
+    }
+  }
+
+  // 1. Intentar aplicar el flash real al MediaStreamTrack de la cámara si está encendida
+  try {
+    const videoEl = document.querySelector('#qrReaderContainer video');
+    if (videoEl && videoEl.srcObject) {
+      const stream = videoEl.srcObject;
+      const tracks = stream.getVideoTracks();
+      if (tracks && tracks.length > 0) {
+        const track = tracks[0];
+        const capabilities = track.getCapabilities ? track.getCapabilities() : {};
+        if (capabilities.torch) {
+          await track.applyConstraints({
+            advanced: [{ torch: AppState.torchActive }]
+          });
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("No se pudo aplicar torch al hardware:", err);
+  }
+
+  // 2. Feedback visual en interfaz
   if (AppState.torchActive) {
     if (torchHalo) {
       torchHalo.classList.remove('opacity-0');
       torchHalo.classList.add('opacity-100');
     }
     if (toggleTorchBtn) {
-      toggleTorchBtn.classList.add('bg-amber-100', 'text-amber-900');
+      toggleTorchBtn.classList.add('bg-amber-100', 'text-amber-900', 'border-amber-400');
+      toggleTorchBtn.classList.remove('bg-surface-container', 'text-on-surface-variant');
     }
+    if (torchIcon) {
+      torchIcon.textContent = 'flashlight_on';
+      torchIcon.classList.add('text-amber-600');
+    }
+    if (torchText) {
+      torchText.textContent = 'Linterna ON';
+    }
+    playPopSound();
   } else {
     if (torchHalo) {
       torchHalo.classList.remove('opacity-100');
       torchHalo.classList.add('opacity-0');
     }
     if (toggleTorchBtn) {
-      toggleTorchBtn.classList.remove('bg-amber-100', 'text-amber-900');
+      toggleTorchBtn.classList.remove('bg-amber-100', 'text-amber-900', 'border-amber-400');
+      toggleTorchBtn.classList.add('bg-surface-container', 'text-on-surface-variant');
     }
+    if (torchIcon) {
+      torchIcon.textContent = 'flashlight_off';
+      torchIcon.classList.remove('text-amber-600');
+    }
+    if (torchText) {
+      torchText.textContent = 'Linterna';
+    }
+    playPopSound();
   }
 }
 
@@ -1076,50 +1258,39 @@ function toggleTorch() {
 // ==========================================
 function openReceiptModal() {
   if (AppState.cart.length === 0) {
-    // Alerta divertida
     playPopSound();
     alert("¡Tu carrito está vacío! Escanea productos primero con el botón ¡HACER PIP! 🛒✨");
     return;
   }
 
-  // Sonido auténtico de registradora
   playChaChingSound();
   triggerHaptic();
 
-  // ¡Lluvia de confeti festivo para los niños!
-  if (typeof confetti === "function") {
-    confetti({
-      particleCount: 70,
-      spread: 60,
-      origin: { y: 0.8 }
-    });
-  }
-
   const modal = document.getElementById('receiptModal');
-  const dateTimeSpan = document.getElementById('receiptDateTime');
-  const itemsList = document.getElementById('receiptItemsList');
+  const itemsContainer = document.getElementById('receiptItemsList');
   const totalCountSpan = document.getElementById('receiptItemTotalCount');
   const subtotalSpan = document.getElementById('receiptSubtotal');
   const finalTotalSpan = document.getElementById('receiptFinalTotal');
+  const dateTimeSpan = document.getElementById('receiptDateTime');
 
   const now = new Date();
   if (dateTimeSpan) {
-    dateTimeSpan.textContent = `Fecha: ${now.toLocaleDateString('es-AR')} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    dateTimeSpan.textContent = `Fecha: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   }
 
-  if (itemsList) {
-    itemsList.innerHTML = '';
+  if (itemsContainer) {
+    itemsContainer.innerHTML = '';
     AppState.cart.forEach(item => {
       const row = document.createElement('div');
       row.className = 'flex justify-between items-center text-xs py-0.5';
       row.innerHTML = `
-        <div class="flex items-center gap-1.5 truncate pr-2">
+        <div class="flex items-center gap-1.5 truncate max-w-[210px]">
           <span>${item.emoji}</span>
-          <span class="truncate">${item.name}</span>
+          <span class="truncate font-body font-semibold">${item.name}</span>
         </div>
-        <span class="font-bold shrink-0">${formatCurrency(item.price)}</span>
+        <span class="font-mono font-bold shrink-0">${formatCurrency(item.price)}</span>
       `;
-      itemsList.appendChild(row);
+      itemsContainer.appendChild(row);
     });
   }
 
@@ -1150,17 +1321,88 @@ function startNewShopping() {
 }
 
 // ==========================================
-// 9. MODAL DE CONFIGURACIÓN DEL LOCAL
+// 9. ASISTENTE DE CONFIGURACIÓN POR PASOS (WIZARD)
 // ==========================================
+let currentConfigStep = 1;
+const TOTAL_CONFIG_STEPS = 4;
+
+function setConfigStep(step) {
+  currentConfigStep = Math.max(1, Math.min(TOTAL_CONFIG_STEPS, step));
+
+  // Ocultar/Mostrar pantallas de paso
+  for (let i = 1; i <= TOTAL_CONFIG_STEPS; i++) {
+    const stepEl = document.getElementById(`configStep${i}`);
+    if (stepEl) {
+      stepEl.classList.toggle('hidden', i !== currentConfigStep);
+    }
+  }
+
+  // Título e indicador de paso
+  const stepLabel = document.getElementById('configStepLabel');
+  const stepTitles = [
+    "Paso 1: ¿Qué negocio abrimos hoy?",
+    "Paso 2: Nombre y Colores",
+    "Paso 3: Sonido del Escáner (Pip)",
+    "Paso 4: Modo de Productos"
+  ];
+  if (stepLabel) {
+    stepLabel.textContent = stepTitles[currentConfigStep - 1] || `Paso ${currentConfigStep} de ${TOTAL_CONFIG_STEPS}`;
+  }
+
+  // Dots de progreso
+  for (let i = 1; i <= TOTAL_CONFIG_STEPS; i++) {
+    const dot = document.getElementById(`stepDot${i}`);
+    if (dot) {
+      if (i === currentConfigStep) {
+        dot.className = "w-6 h-2 rounded-full bg-primary transition-all";
+      } else if (i < currentConfigStep) {
+        dot.className = "w-2 h-2 rounded-full bg-primary/60 transition-all";
+      } else {
+        dot.className = "w-2 h-2 rounded-full bg-slate-200 transition-all";
+      }
+    }
+  }
+
+  // Botones de navegación
+  const prevBtn = document.getElementById('configPrevBtn');
+  const nextBtn = document.getElementById('configNextBtn');
+  const saveBtn = document.getElementById('configSaveBtn');
+
+  if (prevBtn) {
+    prevBtn.classList.toggle('hidden', currentConfigStep === 1);
+  }
+
+  if (currentConfigStep === TOTAL_CONFIG_STEPS) {
+    if (nextBtn) nextBtn.classList.add('hidden');
+    if (saveBtn) saveBtn.classList.remove('hidden');
+  } else {
+    if (nextBtn) nextBtn.classList.remove('hidden');
+    if (saveBtn) saveBtn.classList.add('hidden');
+  }
+}
+
+function nextConfigStep() {
+  playPopSound();
+  if (currentConfigStep < TOTAL_CONFIG_STEPS) {
+    setConfigStep(currentConfigStep + 1);
+  }
+}
+
+function prevConfigStep() {
+  playPopSound();
+  if (currentConfigStep > 1) {
+    setConfigStep(currentConfigStep - 1);
+  }
+}
+
 function openConfigModal() {
   playPopSound();
   const modal = document.getElementById('configModal');
   const storeInput = document.getElementById('configStoreName');
-  const cashierInput = document.getElementById('configCashierName');
 
   if (storeInput) storeInput.value = AppState.storeConfig.storeName;
-  if (cashierInput) cashierInput.value = AppState.storeConfig.cashierName;
 
+  setConfigStep(1);
   applyStoreConfig();
 
   if (modal) {
@@ -1179,13 +1421,8 @@ function closeConfigModal() {
 
 function saveConfigFromModal() {
   const storeInput = document.getElementById('configStoreName');
-  const cashierInput = document.getElementById('configCashierName');
-
   if (storeInput && storeInput.value.trim()) {
     AppState.storeConfig.storeName = storeInput.value.trim();
-  }
-  if (cashierInput && cashierInput.value.trim()) {
-    AppState.storeConfig.cashierName = cashierInput.value.trim();
   }
 
   saveStoredConfig();
@@ -1252,35 +1489,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleTorchBtn = document.getElementById('toggleTorchBtn');
   if (toggleTorchBtn) toggleTorchBtn.addEventListener('click', toggleTorch);
 
-  // 7. Modal de Configuración
+  // 7. Modal de Configuración y Navegación por Pasos
   const openConfigBtn = document.getElementById('openConfigBtn');
   if (openConfigBtn) openConfigBtn.addEventListener('click', openConfigModal);
 
   const closeConfigBtn = document.getElementById('closeConfigBtn');
   if (closeConfigBtn) closeConfigBtn.addEventListener('click', closeConfigModal);
 
+  const configPrevBtn = document.getElementById('configPrevBtn');
+  if (configPrevBtn) configPrevBtn.addEventListener('click', prevConfigStep);
+
+  const configNextBtn = document.getElementById('configNextBtn');
+  if (configNextBtn) configNextBtn.addEventListener('click', nextConfigStep);
+
+  const configSaveBtn = document.getElementById('configSaveBtn');
+  if (configSaveBtn) configSaveBtn.addEventListener('click', saveConfigFromModal);
+
+  // Botón legacy si existiera
   const saveConfigBtn = document.getElementById('saveConfigBtn');
   if (saveConfigBtn) saveConfigBtn.addEventListener('click', saveConfigFromModal);
 
-  // Opciones de moneda en configuración
-  document.querySelectorAll('.currency-opt-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      playPopSound();
-      document.querySelectorAll('.currency-opt-btn').forEach(b => {
-        b.classList.remove('border-primary', 'bg-sky-100', 'ring-2', 'ring-primary/40');
-        b.classList.add('border-outline-variant', 'bg-white');
-      });
-      btn.classList.remove('border-outline-variant', 'bg-white');
-      btn.classList.add('border-primary', 'bg-sky-100', 'ring-2', 'ring-primary/40');
-
-      AppState.storeConfig.currency = btn.dataset.currency;
-      AppState.storeConfig.currencyPrefix = btn.dataset.prefix || "$";
-    });
-  });
-
   // Opciones de modo de producto (Genérico vs Fantasía)
   document.querySelectorAll('.product-mode-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       playPopSound();
       AppState.storeConfig.productMode = btn.dataset.mode;
       applyStoreConfig();
@@ -1290,36 +1521,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Opciones de sonido de Pip (con prueba de sonido inmediata al tocar)
   document.querySelectorAll('.pip-sound-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       const soundType = btn.dataset.sound;
       AppState.storeConfig.pipSound = soundType;
 
-      // Animación pop visual al tocar
       btn.classList.add('animate-sound-pop');
       setTimeout(() => btn.classList.remove('animate-sound-pop'), 250);
 
-      // Reproducir sonido para que escuchen la prueba inmediatamente
       playScannerBeep(soundType);
       applyStoreConfig();
       saveStoredConfig();
-    });
-  });
-
-  // Chips rápidos de cajero/a para niños
-  document.querySelectorAll('.cashier-quick-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      playPopSound();
-      const cashierInput = document.getElementById('configCashierName');
-      if (cashierInput && btn.dataset.name) {
-        cashierInput.value = btn.dataset.name;
-        AppState.storeConfig.cashierName = btn.dataset.name;
-      }
-      document.querySelectorAll('.cashier-quick-btn').forEach(b => {
-        b.classList.remove('bg-primary', 'text-white', 'border-primary');
-        b.classList.add('bg-white', 'text-on-surface', 'border-outline-variant');
-      });
-      btn.classList.remove('bg-white', 'text-on-surface', 'border-outline-variant');
-      btn.classList.add('bg-primary', 'text-white', 'border-primary');
     });
   });
 
