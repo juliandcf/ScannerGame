@@ -484,6 +484,10 @@ const registerAudio = new Audio('sounds/register_sound.mp3');
 registerAudio.preload = 'auto';
 let registerAudioBuffer = null;
 
+const ticketPrinterAudio = new Audio('sounds/ticket_printer.mp3');
+ticketPrinterAudio.preload = 'auto';
+let ticketPrinterAudioBuffer = null;
+
 function getAudioContext() {
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -515,7 +519,7 @@ function loadRetailAudioBuffer() {
   } catch (e) { }
 }
 
-// Carga el audio MP3 de caja registradora (Finalizar compra)
+// Carga el audio MP3 de caja registradora (Pagado)
 function loadRegisterAudioBuffer() {
   try {
     const ctx = getAudioContext();
@@ -599,6 +603,58 @@ function playRegisterSound() {
     }
   } catch (err) {
     console.warn("No se pudo reproducir register sound:", err);
+  }
+}
+
+// Carga el audio MP3 de impresora de ticket
+function loadTicketPrinterAudioBuffer() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx || ticketPrinterAudioBuffer) return;
+    fetch('sounds/ticket_printer.mp3')
+      .then(res => {
+        if (!res.ok) throw new Error('Error al cargar archivo');
+        return res.arrayBuffer();
+      })
+      .then(arr => ctx.decodeAudioData(arr))
+      .then(decoded => {
+        ticketPrinterAudioBuffer = decoded;
+      })
+      .catch(() => { });
+  } catch (e) { }
+}
+
+/**
+ * Reproduce el sonido MP3 de la impresora de ticket al presionar 'Finalizar Compra'
+ */
+function playTicketPrinterSound() {
+  if (!AppState.audioEnabled) return;
+
+  try {
+    const ctx = getAudioContext();
+    if (ctx && ticketPrinterAudioBuffer) {
+      const source = ctx.createBufferSource();
+      source.buffer = ticketPrinterAudioBuffer;
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.9, ctx.currentTime);
+      source.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(0);
+      return;
+    }
+  } catch (e) { }
+
+  try {
+    const soundClone = new Audio('sounds/ticket_printer.mp3');
+    soundClone.volume = 0.9;
+    const promise = soundClone.play();
+    if (promise !== undefined) {
+      promise.catch(err => {
+        console.warn("No se pudo reproducir ticket printer sound HTML5:", err);
+      });
+    }
+  } catch (err) {
+    console.warn("No se pudo reproducir ticket printer sound:", err);
   }
 }
 
@@ -1328,8 +1384,7 @@ function openReceiptModal() {
     return;
   }
 
-  playRegisterSound();
-  playChaChingSound();
+  playTicketPrinterSound();
   triggerHaptic();
 
   // Animación de confeti al abrir el ticket
@@ -1531,6 +1586,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getAudioContext();
     loadRetailAudioBuffer();
     loadRegisterAudioBuffer();
+    loadTicketPrinterAudioBuffer();
     document.removeEventListener('pointerdown', initAudioOnUserInteraction);
     document.removeEventListener('click', initAudioOnUserInteraction);
   };
@@ -1540,6 +1596,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Intento de precarga inmediata
   loadRetailAudioBuffer();
   loadRegisterAudioBuffer();
+  loadTicketPrinterAudioBuffer();
 
   // 1. Botón Manual Grande "¡HACER PIP!"
   const mainPipBtn = document.getElementById('mainPipButton');
