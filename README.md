@@ -1,69 +1,84 @@
-# Súper Pip! - Caja Registradora de Juguete 🛒✨
+# Súper Pip! - Juego de Caja Registradora de Juguete 🛒✨
 
-Una aplicación web interactiva diseñada especialmente para celulares, inspirada en los juguetes de supermercado para jugar con niños y niñas.
+[![GitHub Pages](https://img.shields.io/badge/Demo_en_Vivo-GitHub_Pages-brightgreen?style=for-the-badge&logo=github)](https://juliandcf.github.io/ScannerGame/)
 
-Simula un lector de códigos de barra y QR con el sonido **"pip"** clásico de los supermercados, asignación de precios aleatorios, acumulación de totales en vivo, ticket de compra con sonido *"cha-ching"* y confeti, y un botón táctil grande si no se utiliza la cámara.
+> **¡El juego web interactivo definitivo para jugar a la tienda y al supermercado!**  
+> Diseñado especialmente para celulares, tablets y computadoras, pensado para niños y niñas de 7 a 10 años.
 
----
-
-## 🌟 Características
-
-1. **Lector de Códigos y QR con Cámara Real:**
-   - Detecta códigos de barras y códigos QR reales de productos de la casa o juguetes usando la cámara trasera.
-   - Cuenta con un rayo láser animado y esquinas de enfoque estilo escáner comercial.
-2. **Sonido "Pip" Hiperrealista (Web Audio API):**
-   - Sintetizador de audio nativo (tono sinusoidal de 2250Hz) que no requiere descargar archivos de audio ni internet.
-   - Retroalimentación háptica (vibración en celulares) y destello verde en pantalla al registrar cada producto.
-3. **Botón Manual Gigante "¡HACER PIP!":**
-   - Si no quieres activar la cámara, o los juguetes no tienen código, puedes presionar el botón rojo 3D o tocar el visor para escanear productos inmediatamente.
-4. **Catálogo Infantil y Precios Aleatorios:**
-   - Más de 25 productos divertidos con emojis (chocolates, frutas, peluches, pizzas, cereales, etc.).
-   - Precios aleatorios calculados en cada escaneo para hacer la experiencia divertida y cambiante.
-5. **Finalizar Compra y Ticket de Supermercado:**
-   - Muestra la suma total en tiempo real.
-   - El botón **"Finalizar Compra"** reproduce la campanilla de caja registradora (*"cha-ching"*), lanza confeti y despliega el ticket detallado con fecha, hora, productos y código de barras.
-   - Botón **"¡Nueva Compra!"** para reiniciar el carrito y seguir jugando.
-6. **Personalización del Negocio:**
-   - Botón de tienda para personalizar el nombre del supermercado (ej: *Súper Sofi*, *Minimarket Mágico*) y el nombre del cajero/a estrella (el nombre de tu sobrina).
+🎮 **[👉 ¡TOCA AQUÍ PARA JUGAR EL DEMO EN VIVO! 🚀](https://juliandcf.github.io/ScannerGame/)**
 
 ---
 
-## 🚀 Cómo probarlo localmente
+## 🎈 ¿De qué se trata el juego?
 
-Puedes hacer doble clic en `index.html` para abrirlo directamente en cualquier navegador (Chrome, Edge, Safari, Firefox).
+**Súper Pip!** convierte cualquier teléfono móvil o tablet en una **caja registradora de juguete profesional**. Permite a los más chicos simular que atienden su propio negocio jugando con amigos, hermanitos o la familia.
 
-Para probar la cámara en tu celular en la misma red Wi-Fi:
-1. Abre una terminal en esta carpeta.
-2. Inicia un servidor web local sencillo:
+Los niños pueden:
+- **Escanear objetos reales de la casa** usándolos como productos utilizando la cámara del celular (detecta códigos de barras y QR reales).
+- **Usar el botón gigante "¡HACER PIP!"** si prefieren jugar sin cámara o con objetos de juguete.
+- **Elegir entre 12 tipos de comercios** distintos: *Supermercado*, *Tienda de Maquillajes 💄*, *Juguetería*, *Verdulería*, *Heladería*, *Panadería*, *Librería*, *Farmacia*, *Veterinaria*, *Consultorio Médico*, *Carnicería* y *Bazar*.
+- **Personalizar el nombre y colores del negocio** con 5 paletas súper llamativas (*Caramelo & Fresa*, *Súper Héroes*, *Bosque Mágico*, *Galaxia Mágica*, *Día de Sol*) que transforman visualmente toda la aplicación en tiempo real.
+- **Escuchar sonidos realistas de supermercado**:
+  - Sonido "Pip!" al registrar cada producto, impresion de ticket y cierre de caja registradora
+
+---
+
+## 🌟 Características Destacadas
+
+1. **📸 Lector de Códigos y QR con Cámara Real + Linterna**:
+   - Escanea códigos EAN-13, EAN-8, QR y más con la cámara trasera.
+   - Incluye botón de linterna para encender el flash físico del teléfono en entornos oscuros.
+2. **🔊 Efectos de Audio Realistas e Hiper-Responsiros**:
+   - Motor de audio dual de baja latencia (**Web Audio API** + **HTML5 Audio**).
+   - 7 opciones de sonido del lector Pip! (Súper Real MP3, Clásico, Láser, Bip-Bip, Campanita, Burbuja y Sorpresa).
+3. **🎨 Asistente de Configuración por Pasos (Sin Scroll en Móviles)**:
+   - Configuración en 4 pasos (*Rubro*, *Nombre y Colores*, *Sonido*, *Modo de Productos*) sin problemas de desplazamiento en celulares.
+4. **🛍️ Modos de Juego Flexibles**:
+   - **Escáner de Casa (Solo Códigos)**: Para asignar precios e inventario a cualquier empaque real de la casa.
+   - **Nombres Divertidos**: Muestra productos temáticos según el comercio (ej. *Labial Mágico*, *Medialunas*, *Paleta de Sombras*, *Osito de Peluche*).
+5. **🧾 Ticket de Compra Imprimible de Juguete**:
+   - Desglose con fecha, hora, total a pagar en Pesos (`$`), código de barras y felicitaciones.
+6. **📱 App Web Instalable (PWA)**:
+   - Se puede agregar a la pantalla de inicio del celular y jugar en pantalla completa como una app nativa.
+
+---
+
+## 🔗 Enlace al Demo en Vivo
+
+Puedes acceder a la versión web desplegada y lista para jugar en GitHub Pages:
+
+👉 **[https://juliandcf.github.io/ScannerGame/](https://juliandcf.github.io/ScannerGame/)**
+
+---
+
+## 📱 Cómo instalarlo en tu Celular (Pantalla Completa)
+
+Gracias a su soporte PWA, puedes agregarlo a la pantalla de inicio de tu teléfono sin necesidad de descargar nada de la tienda de aplicaciones:
+
+- **En Android (Chrome):**
+  1. Entra a [https://juliandcf.github.io/ScannerGame/](https://juliandcf.github.io/ScannerGame/) en Chrome.
+  2. Toca los tres puntos arriba a la derecha.
+  3. Selecciona **"Agregar a la pantalla principal"** o **"Instalar aplicación"**.
+
+- **En iPhone / iPad (Safari):**
+  1. Entra al enlace en Safari.
+  2. Toca el botón de **Compartir** (el icono de cuadrado con flecha hacia arriba).
+  3. Selecciona **"Agregar al inicio"**.
+
+---
+
+## 💻 Desarrollo y Ejecución Local
+
+Si deseas probar el proyecto localmente o realizar modificaciones:
+
+1. Clona el repositorio:
    ```bash
+   git clone git@github.com:juliandcf/ScannerGame.git
+   ```
+2. Inicia un servidor HTTP local (necesario para el acceso a la cámara y los archivos audio `.mp3`):
+   ```bash
+   npx serve .
+   # O con Python:
    python -m http.server 8000
    ```
-3. En tu celular, entra a `http://TU_IP_LOCAL:8000`.
-
----
-
-## 🌐 Cómo publicarlo gratis (GitHub Pages / Google)
-
-Para que tu sobrina y tú puedan entrar desde cualquier celular simplemente tocando un enlace (y para que el navegador permita el uso de la cámara, que requiere HTTPS):
-
-### Opción 1: GitHub Pages (Recomendado, 2 minutos)
-1. Entra a [github.com](https://github.com) y crea un nuevo repositorio (por ejemplo `caja-registradora`).
-2. Sube estos archivos (`index.html`, `style.css`, `app.js`, `manifest.json`).
-3. Ve a **Settings** > **Pages** en tu repositorio.
-4. En **Branch**, selecciona `main` (o `master`) y guarda.
-5. ¡Listo! Te dará un enlace como `https://tu-usuario.github.io/caja-registradora/`.
-
-### Opción 2: Google Sites / Firebase Hosting
-- En **Google Sites**, puedes insertar la aplicación mediante el bloque **"Insertar" -> "Código embebido"** o vincularla a un subdominio.
-- También puedes subir esta carpeta a servicios de hosting estático gratuitos de 1 clic como **Vercel**, **Netlify** o **Firebase Hosting**.
-
----
-
-## 📱 Cómo instalarlo como app en el celular
-
-Gracias al archivo `manifest.json`, puedes instalarlo en la pantalla de inicio del teléfono:
-
-- **En Android (Chrome):** Toca los tres puntos arriba a la derecha > **"Agregar a la pantalla principal"** o **"Instalar aplicación"**.
-- **En iPhone (Safari):** Toca el botón de Compartir (el cuadrito con la flecha hacia arriba) > **"Agregar al inicio"**.
-
-¡Se abrirá en pantalla completa sin barras de navegación, luciendo exactamente como una app de juguete real!
+3. Abre `http://localhost:8000` en tu navegador.
