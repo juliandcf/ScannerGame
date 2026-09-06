@@ -475,12 +475,14 @@ function saveStoredConfig() {
 // ==========================================
 let audioCtx = null;
 
-// Objeto Audio pre-cargado para el sonido MP3 de caja de supermercado
-const retailAudio = new Audio('retail-checkout-beep-sound.mp3');
+// Objetos Audio pre-cargados desde la subcarpeta sounds/
+const retailAudio = new Audio('sounds/retail-checkout-beep-sound.mp3');
 retailAudio.preload = 'auto';
-
-// Búfer opcional en Web Audio API para latencia cero (0ms)
 let retailAudioBuffer = null;
+
+const registerAudio = new Audio('sounds/register_sound.mp3');
+registerAudio.preload = 'auto';
+let registerAudioBuffer = null;
 
 function getAudioContext() {
   if (!audioCtx) {
@@ -495,12 +497,12 @@ function getAudioContext() {
   return audioCtx;
 }
 
-// Carga el audio MP3 en memoria de Web Audio API si está disponible
+// Carga el audio MP3 de escaner en memoria de Web Audio API
 function loadRetailAudioBuffer() {
   try {
     const ctx = getAudioContext();
     if (!ctx || retailAudioBuffer) return;
-    fetch('retail-checkout-beep-sound.mp3')
+    fetch('sounds/retail-checkout-beep-sound.mp3')
       .then(res => {
         if (!res.ok) throw new Error('Error al cargar archivo');
         return res.arrayBuffer();
@@ -509,12 +511,26 @@ function loadRetailAudioBuffer() {
       .then(decoded => {
         retailAudioBuffer = decoded;
       })
-      .catch(() => {
-        // En caso de CORS o protocolo file://, el reproductor de Audio estándar funcionará perfectamente
-      });
-  } catch (e) {
-    // Silencioso
-  }
+      .catch(() => {});
+  } catch (e) {}
+}
+
+// Carga el audio MP3 de caja registradora (Finalizar compra)
+function loadRegisterAudioBuffer() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx || registerAudioBuffer) return;
+    fetch('sounds/register_sound.mp3')
+      .then(res => {
+        if (!res.ok) throw new Error('Error al cargar archivo');
+        return res.arrayBuffer();
+      })
+      .then(arr => ctx.decodeAudioData(arr))
+      .then(decoded => {
+        registerAudioBuffer = decoded;
+      })
+      .catch(() => {});
+  } catch (e) {}
 }
 
 /**
@@ -523,24 +539,20 @@ function loadRetailAudioBuffer() {
 function playRetailBeep() {
   if (!AppState.audioEnabled) return;
 
-  // 1. Intentar reproducción con búfer Web Audio API (0ms de latencia)
   try {
     const ctx = getAudioContext();
     if (ctx && retailAudioBuffer) {
       const source = ctx.createBufferSource();
       source.buffer = retailAudioBuffer;
       const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.75, ctx.currentTime);
+      gain.gain.setValueAtTime(0.85, ctx.currentTime);
       source.connect(gain);
       gain.connect(ctx.destination);
       source.start(0);
       return;
     }
-  } catch (e) {
-    // Si falla, pasamos al fallback
-  }
+  } catch (e) {}
 
-  // 2. Fallback con elemento Audio HTML5 (clonado para permitir escaneos rápidos seguidos)
   try {
     const soundClone = retailAudio.cloneNode();
     soundClone.volume = 0.85;
@@ -553,6 +565,41 @@ function playRetailBeep() {
     }
   } catch (err) {
     console.warn("No se pudo reproducir retail audio:", err);
+  }
+}
+
+/**
+ * Reproduce el sonido MP3 de caja registradora al finalizar compra
+ */
+function playRegisterSound() {
+  if (!AppState.audioEnabled) return;
+
+  try {
+    const ctx = getAudioContext();
+    if (ctx && registerAudioBuffer) {
+      const source = ctx.createBufferSource();
+      source.buffer = registerAudioBuffer;
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.9, ctx.currentTime);
+      source.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(0);
+      return;
+    }
+  } catch (e) {}
+
+  try {
+    const soundClone = registerAudio.cloneNode();
+    soundClone.volume = 0.9;
+    const promise = soundClone.play();
+    if (promise !== undefined) {
+      promise.catch(() => {
+        registerAudio.currentTime = 0;
+        registerAudio.play().catch(() => {});
+      });
+    }
+  } catch (err) {
+    console.warn("No se pudo reproducir register sound:", err);
   }
 }
 
@@ -1080,15 +1127,36 @@ function renderPaletteButtons() {
     const isSelected = pal.id === currentPalette;
     const btn = document.createElement('button');
     btn.type = 'button';
-      <span class="text-xs font-headline font-bold text-on-surface leading-tight">${pal.name}</span>
+    btn.className = `p-2.5 rounded-2xl border-2 flex items-center gap-2.5 transition-all active:scale-95 cursor-pointer ${
+      isSelected
+        ? 'font-black scale-[1.02] shadow-sm'
+        : 'bg-white hover:border-slate-300 shadow-xs'
+    }`;
+    btn.style.borderColor = isSelected ? pal.primary : '#e2e8f0';
+    btn.style.backgroundColor = isSelected ? pal.accent : '#ffffff';
+    if (isSelected) {
+      btn.style.boxShadow = `0 4px 14px ${pal.glow}`;
+    }
+
+    btn.innerHTML = `
+      <div class="w-8 h-8 rounded-full shrink-0 shadow-xs flex items-center justify-center text-sm text-white font-black transition-transform" style="background: ${pal.bgGradient}; border: 2.5px solid ${pal.primary}">
+        ${isSelected ? '<span class="drop-shadow-sm">✓</span>' : pal.emoji}
+      </div>
+      <div class="text-left leading-tight">
+        <span class="text-xs font-headline font-black block" style="color: ${isSelected ? pal.primaryDark : '#1e293b'}">${pal.name}</span>
+        <span class="text-[10px] font-body font-semibold block opacity-75" style="color: ${isSelected ? pal.primaryDark : '#64748b'}">${pal.subtitle || ''}</span>
+      </div>
     `;
+
     btn.addEventListener('click', () => {
       playPopSound();
       AppState.storeConfig.colorPalette = pal.id;
-      renderPaletteButtons();
+      // Inmediata transformación de toda la web en tiempo real
       applyStoreConfig();
+      renderPaletteButtons();
       saveStoredConfig();
     });
+
     container.appendChild(btn);
   });
 }
