@@ -308,7 +308,7 @@ const AppState = {
     currency: "⭐ Pips",
     currencyPrefix: "$",
     productMode: "generic", // "generic" = No dice qué producto es (Producto #1, #2). "fantasy" = Chocolate, Banana...
-    pipSound: "classic", // "classic", "laser", "double", "bell", "pop", "random"
+    pipSound: "retail", // "retail" (MP3 Real), "classic", "laser", "double", "bell", "pop", "random"
     commerceType: "supermarket" // Tipo de comercio activo
   }
 };
@@ -334,9 +334,16 @@ function saveStoredConfig() {
 }
 
 // ==========================================
-// 3. SINTETIZADOR DE AUDIO (Web Audio API)
+// 3. SINTETIZADOR DE AUDIO (Web Audio API & MP3)
 // ==========================================
 let audioCtx = null;
+
+// Objeto Audio pre-cargado para el sonido MP3 de caja de supermercado
+const retailAudio = new Audio('retail-checkout-beep-sound.mp3');
+retailAudio.preload = 'auto';
+
+// Búfer opcional en Web Audio API para latencia cero (0ms)
+let retailAudioBuffer = null;
 
 function getAudioContext() {
   if (!audioCtx) {
@@ -351,6 +358,67 @@ function getAudioContext() {
   return audioCtx;
 }
 
+// Carga el audio MP3 en memoria de Web Audio API si está disponible
+function loadRetailAudioBuffer() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx || retailAudioBuffer) return;
+    fetch('retail-checkout-beep-sound.mp3')
+      .then(res => {
+        if (!res.ok) throw new Error('Error al cargar archivo');
+        return res.arrayBuffer();
+      })
+      .then(arr => ctx.decodeAudioData(arr))
+      .then(decoded => {
+        retailAudioBuffer = decoded;
+      })
+      .catch(() => {
+        // En caso de CORS o protocolo file://, el reproductor de Audio estándar funcionará perfectamente
+      });
+  } catch (e) {
+    // Silencioso
+  }
+}
+
+/**
+ * Reproduce el sonido de caja de supermercado real del archivo MP3
+ */
+function playRetailBeep() {
+  if (!AppState.audioEnabled) return;
+
+  // 1. Intentar reproducción con búfer Web Audio API (0ms de latencia)
+  try {
+    const ctx = getAudioContext();
+    if (ctx && retailAudioBuffer) {
+      const source = ctx.createBufferSource();
+      source.buffer = retailAudioBuffer;
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.75, ctx.currentTime);
+      source.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(0);
+      return;
+    }
+  } catch (e) {
+    // Si falla, pasamos al fallback
+  }
+
+  // 2. Fallback con elemento Audio HTML5 (clonado para permitir escaneos rápidos seguidos)
+  try {
+    const soundClone = retailAudio.cloneNode();
+    soundClone.volume = 0.85;
+    const promise = soundClone.play();
+    if (promise !== undefined) {
+      promise.catch(() => {
+        retailAudio.currentTime = 0;
+        retailAudio.play().catch(() => {});
+      });
+    }
+  } catch (err) {
+    console.warn("No se pudo reproducir retail audio:", err);
+  }
+}
+
 /**
  * Reproduce el sonido de Pip según la configuración o un tipo específico
  * @param {string|null} specificType Tipo forzado (para probar en configuración)
@@ -358,16 +426,21 @@ function getAudioContext() {
 function playScannerBeep(specificType = null) {
   if (!AppState.audioEnabled) return;
   try {
-    const ctx = getAudioContext();
-    if (!ctx) return;
-
-    let soundType = specificType || AppState.storeConfig.pipSound || 'classic';
+    let soundType = specificType || AppState.storeConfig.pipSound || 'retail';
 
     if (soundType === 'random') {
-      const pool = ['classic', 'laser', 'double', 'bell', 'pop'];
+      const pool = ['retail', 'classic', 'laser', 'double', 'bell', 'pop'];
       soundType = pool[Math.floor(Math.random() * pool.length)];
     }
 
+    // Si es el nuevo sonido real en MP3
+    if (soundType === 'retail' || soundType === 'real') {
+      playRetailBeep();
+      return;
+    }
+
+    const ctx = getAudioContext();
+    if (!ctx) return;
     const now = ctx.currentTime;
 
     switch (soundType) {
@@ -767,26 +840,50 @@ function applyStoreConfig() {
   if (btnGen && btnFan) {
     if (AppState.storeConfig.productMode === "fantasy") {
       btnFan.classList.add('border-primary', 'bg-sky-100', 'text-primary');
-      btnFan.classList.remove('border-outline-variant', 'bg-surface-container-low', 'text-on-surface-variant');
+      btnFan.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
       btnGen.classList.remove('border-primary', 'bg-sky-100', 'text-primary');
-      btnGen.classList.add('border-outline-variant', 'bg-surface-container-low', 'text-on-surface-variant');
+      btnGen.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
     } else {
       btnGen.classList.add('border-primary', 'bg-sky-100', 'text-primary');
-      btnGen.classList.remove('border-outline-variant', 'bg-surface-container-low', 'text-on-surface-variant');
+      btnGen.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
       btnFan.classList.remove('border-primary', 'bg-sky-100', 'text-primary');
-      btnFan.classList.add('border-outline-variant', 'bg-surface-container-low', 'text-on-surface-variant');
+      btnFan.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
     }
   }
 
   // 8. Actualizar botones de sonido del Pip en el modal
-  const currentSound = AppState.storeConfig.pipSound || 'classic';
+  const currentSound = AppState.storeConfig.pipSound || 'retail';
   document.querySelectorAll('.pip-sound-btn').forEach(btn => {
     if (btn.dataset.sound === currentSound) {
-      btn.classList.add('border-primary', 'bg-sky-100', 'text-primary');
-      btn.classList.remove('border-outline-variant', 'bg-surface-container-low', 'text-on-surface-variant');
+      btn.classList.add('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
+      btn.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
     } else {
-      btn.classList.remove('border-primary', 'bg-sky-100', 'text-primary');
-      btn.classList.add('border-outline-variant', 'bg-surface-container-low', 'text-on-surface-variant');
+      btn.classList.remove('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
+      btn.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
+    }
+  });
+
+  // 9. Actualizar botones de moneda
+  const currentCurr = AppState.storeConfig.currency || "⭐ Pips";
+  document.querySelectorAll('.currency-opt-btn').forEach(btn => {
+    if (btn.dataset.currency === currentCurr) {
+      btn.classList.add('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
+      btn.classList.remove('border-outline-variant', 'bg-white', 'bg-surface-container-low', 'text-on-surface-variant');
+    } else {
+      btn.classList.remove('border-primary', 'bg-sky-100', 'text-primary', 'ring-2', 'ring-primary/40');
+      btn.classList.add('border-outline-variant', 'bg-white', 'text-on-surface-variant');
+    }
+  });
+
+  // 10. Actualizar selección de chips de cajero/a
+  const currentCashier = AppState.storeConfig.cashierName;
+  document.querySelectorAll('.cashier-quick-btn').forEach(btn => {
+    if (btn.dataset.name === currentCashier) {
+      btn.classList.add('bg-primary', 'text-white', 'border-primary');
+      btn.classList.remove('bg-white', 'text-on-surface', 'border-outline-variant');
+    } else {
+      btn.classList.remove('bg-primary', 'text-white', 'border-primary');
+      btn.classList.add('bg-white', 'text-on-surface', 'border-outline-variant');
     }
   });
 
@@ -1064,6 +1161,8 @@ function openConfigModal() {
   if (storeInput) storeInput.value = AppState.storeConfig.storeName;
   if (cashierInput) cashierInput.value = AppState.storeConfig.cashierName;
 
+  applyStoreConfig();
+
   if (modal) {
     modal.classList.remove('hidden');
     setTimeout(() => modal.classList.remove('opacity-0'), 10);
@@ -1168,11 +1267,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       playPopSound();
       document.querySelectorAll('.currency-opt-btn').forEach(b => {
-        b.classList.remove('border-primary', 'bg-sky-100');
-        b.classList.add('border-outline-variant');
+        b.classList.remove('border-primary', 'bg-sky-100', 'ring-2', 'ring-primary/40');
+        b.classList.add('border-outline-variant', 'bg-white');
       });
-      btn.classList.remove('border-outline-variant');
-      btn.classList.add('border-primary', 'bg-sky-100');
+      btn.classList.remove('border-outline-variant', 'bg-white');
+      btn.classList.add('border-primary', 'bg-sky-100', 'ring-2', 'ring-primary/40');
 
       AppState.storeConfig.currency = btn.dataset.currency;
       AppState.storeConfig.currencyPrefix = btn.dataset.prefix || "$";
@@ -1194,16 +1293,51 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       const soundType = btn.dataset.sound;
       AppState.storeConfig.pipSound = soundType;
-      // Reproducir sonido para que escuchen la prueba
+
+      // Animación pop visual al tocar
+      btn.classList.add('animate-sound-pop');
+      setTimeout(() => btn.classList.remove('animate-sound-pop'), 250);
+
+      // Reproducir sonido para que escuchen la prueba inmediatamente
       playScannerBeep(soundType);
       applyStoreConfig();
       saveStoredConfig();
     });
   });
 
-  // Desbloqueo inicial del AudioContext por políticas de navegadores
+  // Chips rápidos de cajero/a para niños
+  document.querySelectorAll('.cashier-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      playPopSound();
+      const cashierInput = document.getElementById('configCashierName');
+      if (cashierInput && btn.dataset.name) {
+        cashierInput.value = btn.dataset.name;
+        AppState.storeConfig.cashierName = btn.dataset.name;
+      }
+      document.querySelectorAll('.cashier-quick-btn').forEach(b => {
+        b.classList.remove('bg-primary', 'text-white', 'border-primary');
+        b.classList.add('bg-white', 'text-on-surface', 'border-outline-variant');
+      });
+      btn.classList.remove('bg-white', 'text-on-surface', 'border-outline-variant');
+      btn.classList.add('bg-primary', 'text-white', 'border-primary');
+    });
+  });
+
+  // Cerrar modal tocando el fondo oscuro
+  const configModal = document.getElementById('configModal');
+  if (configModal) {
+    configModal.addEventListener('click', (e) => {
+      if (e.target === configModal) {
+        closeConfigModal();
+      }
+    });
+  }
+
+  // Desbloqueo inicial del AudioContext por políticas de navegadores y carga de MP3
   const unlockAudio = () => {
     getAudioContext();
+    loadRetailAudioBuffer();
+    retailAudio.load();
     window.removeEventListener('click', unlockAudio);
     window.removeEventListener('touchstart', unlockAudio);
   };

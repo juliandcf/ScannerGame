@@ -329,117 +329,189 @@
   </div>
 
   <!-- Store Configuration Modal (Configuración del Local) -->
-  <div id="configModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
-    <div class="w-full max-w-sm bg-white rounded-3xl p-5 shadow-2xl border-2 border-outline-variant space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary text-2xl" data-icon="store">store</span>
-          <h3 class="font-headline font-bold text-lg text-primary">Ajustes de tu Supermercado</h3>
+  <div id="configModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 hidden opacity-0 transition-opacity duration-200 overflow-hidden">
+    <div class="w-full max-w-md bg-white rounded-t-[32px] sm:rounded-3xl shadow-2xl border-2 border-outline-variant flex flex-col max-h-[92dvh] sm:max-h-[88vh] overflow-hidden animate-receipt">
+      
+      <!-- Modal Header (Fixed at top) -->
+      <div class="p-4 sm:p-5 border-b border-slate-100 bg-surface-container-low/70 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center shadow-sm text-2xl">
+            🏬
+          </div>
+          <div>
+            <h3 class="font-headline font-extrabold text-lg sm:text-xl text-primary leading-tight">Tu Tiendita Mágica</h3>
+            <p class="font-headline text-[11px] sm:text-xs font-bold text-on-surface-variant">¡Personalizá tu juego como más te guste!</p>
+          </div>
         </div>
-        <button id="closeConfigBtn" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200">
-          <span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+        <button id="closeConfigBtn" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 active:scale-90 flex items-center justify-center text-slate-600 transition-transform" title="Cerrar">
+          <span class="material-symbols-outlined text-2xl" data-icon="close">close</span>
         </button>
       </div>
 
-      <!-- Commerce / Business Type Selector -->
-      <div class="space-y-1.5">
-        <label class="font-headline font-bold text-xs text-on-surface">¿Qué negocio quieres abrir hoy?:</label>
-        <div class="grid grid-cols-3 gap-1.5 max-h-44 overflow-y-auto p-1.5 receipt-scroll bg-surface-container-low rounded-2xl border border-outline-variant" id="commerceTypesContainer">
-          <!-- Populated by app.js -->
-        </div>
-      </div>
-
-      <!-- Store Name Input -->
-      <div class="space-y-1.5">
-        <label class="font-headline font-bold text-xs text-on-surface" for="configStoreName">Nombre del Local:</label>
-        <input type="text" id="configStoreName" class="w-full bg-surface-container-low text-on-surface font-headline font-bold text-sm rounded-xl border-2 border-outline-variant px-3 py-2 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Ej: Súper Sofi" maxlength="24"/>
+      <!-- Modal Scrollable Content (Smooth momentum scroll for touch phones) -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5 receipt-scroll modal-scroll-touch overscroll-contain">
         
-        <!-- Suggestions Chips -->
-        <div class="flex flex-wrap gap-1.5 pt-1" id="suggestionChipsContainer">
-          <!-- Populated dynamically based on commerce type -->
+        <!-- Step 1: Commerce / Business Type Selector -->
+        <div class="bg-surface-container-low/50 rounded-2xl p-3.5 border border-outline-variant/60 space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="step-badge">1</span>
+            <label class="font-headline font-extrabold text-xs sm:text-sm text-on-surface">¿Qué negocio abrimos hoy?:</label>
+          </div>
+          <div class="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto p-1.5 receipt-scroll modal-scroll-touch bg-white rounded-xl border border-outline-variant/60" id="commerceTypesContainer">
+            <!-- Populated dynamically by app.js -->
+          </div>
         </div>
+
+        <!-- Step 2: Store Name Input -->
+        <div class="bg-surface-container-low/50 rounded-2xl p-3.5 border border-outline-variant/60 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="step-badge">2</span>
+            <label class="font-headline font-extrabold text-xs sm:text-sm text-on-surface" for="configStoreName">Nombre de tu Local:</label>
+          </div>
+          <input type="text" id="configStoreName" class="w-full bg-white text-on-surface font-headline font-bold text-sm sm:text-base rounded-xl border-2 border-outline-variant px-3.5 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Ej: Súper Sofi 🛒" maxlength="24"/>
+          
+          <!-- Suggestions Chips -->
+          <div class="flex flex-wrap gap-1.5 pt-1" id="suggestionChipsContainer">
+            <!-- Populated dynamically based on commerce type -->
+          </div>
+        </div>
+
+        <!-- Step 3: Cashier Name Input with Fast Avatar Chips -->
+        <div class="bg-surface-container-low/50 rounded-2xl p-3.5 border border-outline-variant/60 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="step-badge">3</span>
+            <label class="font-headline font-extrabold text-xs sm:text-sm text-on-surface" for="configCashierName">¿Quién atiende hoy? (Cajero/a):</label>
+          </div>
+          <input type="text" id="configCashierName" class="w-full bg-white text-on-surface font-headline font-bold text-sm sm:text-base rounded-xl border-2 border-outline-variant px-3.5 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Ej: Sofi Estrella ⭐" maxlength="20"/>
+          
+          <!-- Kid-Friendly Fast Cashier Selection Chips -->
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <button type="button" class="cashier-quick-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-white border border-outline-variant text-on-surface hover:bg-primary hover:text-white transition-all active:scale-95" data-name="Sofi Estrella ⭐">
+              ⭐ Sofi
+            </button>
+            <button type="button" class="cashier-quick-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-white border border-outline-variant text-on-surface hover:bg-primary hover:text-white transition-all active:scale-95" data-name="Mateo Veloz 🚀">
+              🚀 Mateo
+            </button>
+            <button type="button" class="cashier-quick-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-white border border-outline-variant text-on-surface hover:bg-primary hover:text-white transition-all active:scale-95" data-name="Cami Dulce 🌸">
+              🌸 Cami
+            </button>
+            <button type="button" class="cashier-quick-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-white border border-outline-variant text-on-surface hover:bg-primary hover:text-white transition-all active:scale-95" data-name="Cajero Pro 🏆">
+              🏆 Cajero Pro
+            </button>
+            <button type="button" class="cashier-quick-btn text-[11px] font-headline font-bold px-2.5 py-1 rounded-full bg-white border border-outline-variant text-on-surface hover:bg-primary hover:text-white transition-all active:scale-95" data-name="Capitán Pip ⚡">
+              ⚡ Capitán Pip
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 4: Pip Sound Selection (With New MP3 Retail Sound!) -->
+        <div class="bg-surface-container-low/50 rounded-2xl p-3.5 border border-outline-variant/60 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="step-badge">4</span>
+              <label class="font-headline font-extrabold text-xs sm:text-sm text-on-surface">Sonido del Pip (Lector):</label>
+            </div>
+            <span class="text-[11px] text-primary font-extrabold bg-sky-100 px-2 py-0.5 rounded-full animate-pulse">¡Tocá para escuchar! 🎶</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="pipSoundContainer">
+            <!-- NEW MP3 RETAIL SOUND -->
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-primary bg-sky-100 text-primary font-headline text-xs font-bold flex flex-col items-center justify-center transition-all relative shadow-xs col-span-2 sm:col-span-1" data-sound="retail">
+              <span class="absolute -top-2 right-2 bg-amber-400 text-amber-950 text-[9px] px-1.5 py-0.5 rounded-full font-black uppercase shadow-xs">MP3 Real</span>
+              <span class="text-2xl">🏪</span>
+              <span class="mt-1 font-extrabold text-xs">Súper Real</span>
+              <span class="text-[10px] opacity-80">Sonido de Caja</span>
+            </button>
+            
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-sound="classic">
+              <span class="text-2xl">🛒</span>
+              <span class="mt-1 font-extrabold text-xs">Clásico</span>
+              <span class="text-[10px] opacity-80">Pip tradicional</span>
+            </button>
+
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-sound="laser">
+              <span class="text-2xl">⚡</span>
+              <span class="mt-1 font-extrabold text-xs">Láser</span>
+              <span class="text-[10px] opacity-80">Espacial</span>
+            </button>
+
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-sound="double">
+              <span class="text-2xl">🎶</span>
+              <span class="mt-1 font-extrabold text-xs">Bip-Bip</span>
+              <span class="text-[10px] opacity-80">Doble tono</span>
+            </button>
+
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-sound="bell">
+              <span class="text-2xl">🔔</span>
+              <span class="mt-1 font-extrabold text-xs">Campanita</span>
+              <span class="text-[10px] opacity-80">Ding musical</span>
+            </button>
+
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-sound="pop">
+              <span class="text-2xl">🫧</span>
+              <span class="mt-1 font-extrabold text-xs">Burbuja</span>
+              <span class="text-[10px] opacity-80">Pop acuático</span>
+            </button>
+
+            <button type="button" class="pip-sound-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs col-span-2 sm:col-span-1" data-sound="random">
+              <span class="text-2xl">🎲</span>
+              <span class="mt-1 font-extrabold text-xs">Sorpresa</span>
+              <span class="text-[10px] opacity-80">¡Varía siempre!</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 5: Currency Options -->
+        <div class="bg-surface-container-low/50 rounded-2xl p-3.5 border border-outline-variant/60 space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="step-badge">5</span>
+            <label class="font-headline font-extrabold text-xs sm:text-sm text-on-surface">Moneda de juego:</label>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" class="currency-opt-btn p-3 rounded-2xl border-2 border-primary bg-sky-100 text-primary font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-currency="⭐ Pips" data-prefix="$">
+              <span class="text-2xl">⭐</span>
+              <span class="mt-1 font-extrabold">Estrellas</span>
+            </button>
+            <button type="button" class="currency-opt-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-currency="🪙 Monedas" data-prefix="🪙">
+              <span class="text-2xl">🪙</span>
+              <span class="mt-1 font-extrabold">Oro</span>
+            </button>
+            <button type="button" class="currency-opt-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs" data-currency="$ Pesos" data-prefix="$">
+              <span class="text-2xl">💵</span>
+              <span class="mt-1 font-extrabold">Pesos $</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 6: Product Display Mode Option (Generic vs Fantasy) -->
+        <div class="bg-surface-container-low/50 rounded-2xl p-3.5 border border-outline-variant/60 space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="step-badge">6</span>
+            <label class="font-headline font-extrabold text-xs sm:text-sm text-on-surface">¿Cómo mostrar los productos?:</label>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <button type="button" id="btnModeFantasy" class="product-mode-btn p-3 rounded-2xl border-2 border-outline-variant bg-white text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs text-center" data-mode="fantasy">
+              <span class="text-3xl">🍫</span>
+              <span class="mt-1 font-extrabold text-sm">Nombres Divertidos</span>
+              <span class="text-[11px] font-normal text-slate-500 leading-tight mt-0.5">Chocolate, galletitas, juguetes...</span>
+            </button>
+            <button type="button" id="btnModeGeneric" class="product-mode-btn p-3 rounded-2xl border-2 border-primary bg-sky-100 text-primary font-headline text-xs font-bold flex flex-col items-center justify-center transition-all shadow-xs text-center" data-mode="generic">
+              <span class="text-3xl">🏷️</span>
+              <span class="mt-1 font-extrabold text-sm">Escáner de Casa</span>
+              <span class="text-[11px] font-normal text-slate-500 leading-tight mt-0.5">¡Para escanear tus objetos reales!</span>
+            </button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Cashier Name Input -->
-      <div class="space-y-1.5">
-        <label class="font-headline font-bold text-xs text-on-surface" for="configCashierName">¿Quién atiende hoy? (Cajero/a):</label>
-        <input type="text" id="configCashierName" class="w-full bg-surface-container-low text-on-surface font-headline font-bold text-sm rounded-xl border-2 border-outline-variant px-3 py-2 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Ej: Sofi Estrella" maxlength="20"/>
+      <!-- Modal Footer (Fixed at bottom so it's always accessible) -->
+      <div class="p-4 bg-white border-t border-slate-100 shadow-[0_-4px_16px_rgba(15,23,42,0.06)] shrink-0">
+        <button id="saveConfigBtn" class="w-full py-3.5 px-4 bg-primary text-white rounded-2xl font-headline font-extrabold text-base toy-button-primary flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+          <span class="material-symbols-outlined text-2xl" data-icon="check_circle">check_circle</span>
+          <span>¡Guardar y Jugar! 🚀</span>
+        </button>
       </div>
 
-      <!-- Currency Options -->
-      <div class="space-y-1.5">
-        <label class="font-headline font-bold text-xs text-on-surface">Moneda de juego:</label>
-        <div class="grid grid-cols-3 gap-2">
-          <button type="button" class="currency-opt-btn p-2 rounded-xl border-2 border-primary bg-sky-100 text-primary font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-currency="⭐ Pips" data-prefix="$">
-            <span class="text-xl">⭐</span>
-            <span class="mt-0.5">Estrellas</span>
-          </button>
-          <button type="button" class="currency-opt-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-currency="🪙 Monedas" data-prefix="🪙">
-            <span class="text-xl">🪙</span>
-            <span class="mt-0.5">Oro</span>
-          </button>
-          <button type="button" class="currency-opt-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-currency="$ Pesos" data-prefix="$">
-            <span class="text-xl">💵</span>
-            <span class="mt-0.5">Pesos $</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Product Display Mode Option (Generic vs Fantasy) -->
-      <div class="space-y-1.5">
-        <label class="font-headline font-bold text-xs text-on-surface">¿Cómo mostrar los productos?:</label>
-        <div class="grid grid-cols-2 gap-2">
-          <button type="button" id="btnModeGeneric" class="product-mode-btn p-2 rounded-xl border-2 border-primary bg-sky-100 text-primary font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-mode="generic">
-            <span class="text-xl">🏷️</span>
-            <span class="mt-0.5">Producto 1, 2, 3...</span>
-            <span class="text-[10px] font-normal text-slate-500 text-center leading-tight">Sin nombres (Ideal para objetos reales)</span>
-          </button>
-          <button type="button" id="btnModeFantasy" class="product-mode-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-mode="fantasy">
-            <span class="text-xl">🍫</span>
-            <span class="mt-0.5">Nombres Divertidos</span>
-            <span class="text-[10px] font-normal text-slate-500 text-center leading-tight">Chocolate, galletitas, juguetes...</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Pip Sound Selection -->
-      <div class="space-y-1.5">
-        <div class="flex items-center justify-between">
-          <label class="font-headline font-bold text-xs text-on-surface">Sonido del Pip (Lector):</label>
-          <span class="text-[10px] text-primary font-bold">¡Toca para probar!</span>
-        </div>
-        <div class="grid grid-cols-3 gap-1.5" id="pipSoundContainer">
-          <button type="button" class="pip-sound-btn p-2 rounded-xl border-2 border-primary bg-sky-100 text-primary font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-sound="classic">
-            <span class="text-lg">🛒</span>
-            <span class="mt-0.5 text-[11px]">Clásico</span>
-          </button>
-          <button type="button" class="pip-sound-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-sound="laser">
-            <span class="text-lg">⚡</span>
-            <span class="mt-0.5 text-[11px]">Láser</span>
-          </button>
-          <button type="button" class="pip-sound-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-sound="double">
-            <span class="text-lg">🎶</span>
-            <span class="mt-0.5 text-[11px]">Bip-Bip</span>
-          </button>
-          <button type="button" class="pip-sound-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-sound="bell">
-            <span class="text-lg">🔔</span>
-            <span class="mt-0.5 text-[11px]">Campanita</span>
-          </button>
-          <button type="button" class="pip-sound-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-sound="pop">
-            <span class="text-lg">💧</span>
-            <span class="mt-0.5 text-[11px]">Burbuja</span>
-          </button>
-          <button type="button" class="pip-sound-btn p-2 rounded-xl border-2 border-outline-variant bg-surface-container-low text-on-surface-variant font-headline text-xs font-bold flex flex-col items-center justify-center transition-all" data-sound="random">
-            <span class="text-lg">🎲</span>
-            <span class="mt-0.5 text-[11px]">Sorpresa</span>
-          </button>
-        </div>
-      </div>
-
-      <button id="saveConfigBtn" class="w-full py-3 px-4 bg-primary text-white rounded-xl font-headline font-bold text-sm toy-button-primary flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-lg" data-icon="check">check</span>
-        <span>Guardar y Jugar</span>
-      </button>
     </div>
   </div>
 
